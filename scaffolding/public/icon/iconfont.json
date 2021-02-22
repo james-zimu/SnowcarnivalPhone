@@ -27,6 +27,13 @@
       "unicode_decimal": 59024
     },
     {
+      "icon_id": "1622345",
+      "name": "雪花",
+      "font_class": "icon-weather-snowflake",
+      "unicode": "e6b1",
+      "unicode_decimal": 59057
+    },
+    {
       "icon_id": "2022937",
       "name": "攻略",
       "font_class": "gonglve",
@@ -53,6 +60,13 @@
       "font_class": "gonglve1",
       "unicode": "e507",
       "unicode_decimal": 58631
+    },
+    {
+      "icon_id": "3379069",
+      "name": "足迹",
+      "font_class": "zuji",
+      "unicode": "e617",
+      "unicode_decimal": 58903
     },
     {
       "icon_id": "3653540",
@@ -95,6 +109,13 @@
       "font_class": "jiudian",
       "unicode": "e603",
       "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "7261746",
+      "name": "雪花",
+      "font_class": "xuehua",
+      "unicode": "e697",
+      "unicode_decimal": 59031
     },
     {
       "icon_id": "7437447",
@@ -160,13 +181,6 @@
       "unicode_decimal": 58885
     },
     {
-      "icon_id": "9947326",
-      "name": "雪花",
-      "font_class": "xuehua",
-      "unicode": "e732",
-      "unicode_decimal": 59186
-    },
-    {
       "icon_id": "10428807",
       "name": "服务尽享",
       "font_class": "fuwu",
@@ -177,8 +191,8 @@
       "icon_id": "10508570",
       "name": "QQ",
       "font_class": "QQ",
-      "unicode": "e697",
-      "unicode_decimal": 59031
+      "unicode": "e698",
+      "unicode_decimal": 59032
     },
     {
       "icon_id": "11116341",
@@ -193,6 +207,13 @@
       "font_class": "shandian",
       "unicode": "e60c",
       "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "11536825",
+      "name": "雪花",
+      "font_class": "xuehua1",
+      "unicode": "e607",
+      "unicode_decimal": 58887
     },
     {
       "icon_id": "12648203",
@@ -261,8 +282,8 @@
       "icon_id": "18666398",
       "name": "地铁",
       "font_class": "subway-active",
-      "unicode": "e607",
-      "unicode_decimal": 58887
+      "unicode": "e608",
+      "unicode_decimal": 58888
     },
     {
       "icon_id": "18916007",

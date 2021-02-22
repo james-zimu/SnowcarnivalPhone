@@ -20,6 +20,7 @@
                  /> -->
           <span  class="toggle-button1" v-for="(item, i) in items" :key="i" style="padding: 5px">
           <toggle-button
+            
             :value="item.value"
             :color="item.color"
             :sync="true"
@@ -156,7 +157,7 @@
 }
 .trip-matter1{
   position: absolute;
-  width: 23rem;
+  width: 21rem;
   top: 3rem;
   left: 1.1rem;
   border-bottom: 0.1rem solid #ddd;
@@ -164,16 +165,16 @@
 }
 #trip-matter1-time{
   font-size: 2rem;
-  color: #468ce6;
+  color:  #ddd;
 }
 #trip-matter1-content{
   font-size: 1rem;
-  color: red;
+  color: #ddd;
 }
 .toggle-button1{
   position:absolute;
   top:5rem;
-  right: -0rem;
+  right: 1rem;
 }
 
 </style>
