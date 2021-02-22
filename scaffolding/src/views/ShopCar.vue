@@ -258,7 +258,7 @@ export default {
     text-align: center;
     line-height: 3rem;
   }
-  .mint-cell-swipe-button{
+  .ShopCar .mint-cell-swipe-button{
     line-height: 11rem !important;
   }
   .ShopCar .else-data{

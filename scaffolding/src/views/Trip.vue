@@ -1,35 +1,42 @@
 
 <template>
-   <div id="trip">
+   <div class="trip">
      <!-- 导入日历组件 -->
       <kl-calendar height="25rem" width="23rem" :show-festival="false" :show-term="false" @date-click="dateClick"/>
     <!-- 待办事项 -->
-      <div  class="trip-matter">
+      <div  class="trip-matter-all">
         <h1>待办事项</h1>
         <div class="hr"></div>
-        <div class="trip-matter1">
-          <p id="trip-matter1-time">2020/2/22</p>
-          <p id="trip-matter1-content">参加郑州冰雪嘉年华</p>
-        </div>
-        <!-- 添加开关 -->
-          <!-- <toggle-button class="toggle-button1" 
-                 @change="toggled = $event.value"
-                 color="#468ce6"
-                 :labels="true"
-                  :sync="false" 
-                 /> -->
-          <span  class="toggle-button1" v-for="(item, i) in items" :key="i" style="padding: 5px">
+          <!-- 如果代办事项为空的话就提示 -->
+        <div v-if="schedule.length>0"></div>
+        <div class="else-data" v-else>暂无代办事项...</div>
+        <!-- 循环代办事项 -->
+        <div class="item"   v-for="(item,index) in schedule" :key="index">
+        <!-- mint ui删除选项 -->
+        <mt-cell-swipe
+            title=""
+            :right="[
+              {
+                content: '删除',
+                style: { background: 'red', color: '#fff' },
+                handler: () => del(index)
+              }
+            ]">
+          <!-- 防止mint ui对样式结构进行破坏 -->
+          <div class="matter">
+            <div class="trip-matter">
+              <p id="trip-matter-time">{{item.udate}}</p>
+              <p id="trip-matter-content">{{item.udetail}}</p>
+            </div>
+            <!-- 添加开关 -->
+          <span  class="toggle-button1" style="padding: 5px">
           <toggle-button
-            
-            :value="item.value"
-            :color="item.color"
-            :sync="true"
-            :labels="true"
-            :key="i"
-            @change="updateItemValue(i)"/>
-        </span>
-        <div class="trip-matter2"></div>
-        
+            :labels="true" 
+            @change="onChangeEventHandler(index)"/>
+          </span>
+         </div>
+        </mt-cell-swipe>
+        </div>
       </div>
   </div>
 </template>
@@ -37,21 +44,13 @@
   export default {
     data(){
       return{
-        // 为按钮添加颜色
-        items: [
-        { color: '#468ce6', value: false }
-      ],
+        schedule:[]
       }
     },
     name: 'App',
-    // mounted () {
-    // var itemIndex = 0;
-    // setInterval(() => {
-    //   this.updateItemValue(itemIndex)
-    //   itemIndex = (itemIndex + 1) % this.items.length
-    // }, 600)
-    // },
+    
     methods: {
+      
       renderMonthChange(year, month) {
         console.log(year, month);
       },
@@ -61,28 +60,85 @@
       },
       //是否添加为待办事项
       dateClick(date,title){
+        console.log(date.date);
+        //获取当前点击时间
+        let time=new Date(date.date);
+        //获取年份
+        let year=time.getFullYear();
+        //获取当月
+        let month=time.getMonth();
+        //获取当天
+        let day=time.getDate();
+        //得到完整的时间
+        let udate = `${year}年${month+1}月${day}日`;
         this.$messagebox({
         title: '是否为今天添加代办事项?',
         message: title,
         showCancelButton: true
         }).then(action=>{  //如果点击确定就可以跳转到待办事项页面开始填入信息
           if(action=='confirm'){
-            console.log('可以添加');
+            //弹出消息框并获取输入内容
+            this.$messagebox.prompt('请输入您要代办的事项').then(({ value, title }) => {
+              //将获取到的内容发送到服务器
+              let udetail=value;
+              let object={
+                udate:udate,
+                udetail:udetail
+              }
+              // console.log(udate);
+              console.log(object);
+              this.axios.post('/schedule',this.qs.stringify(object)).then(res=>{
+                  if(res.data.code==200){
+                    this.$messagebox.alert("成功添加代办事项")
+                        this.getData();
+                 }
+              })
+            });
           }
         });
       },
-      updateItemValue(index) {
-        this.items[index].value = !this.items[index].value
-            let tripMatter1Time=document.getElementById('trip-matter1-time')
-            let tripMatter1Content=document.getElementById('trip-matter1-content')
-        if(!this.items[index].value){
-            tripMatter1Time.style.color="#ddd"
-            tripMatter1Content.style.color="#ddd"
+      //将获取数据封装成函数
+      getData:function(){
+                        // 发送HTTP请求以获取数据
+                          this.axios.get("/schedule").then(res=>{
+                        // 将服务器返回的数据赋予schedule变量
+                        this.schedule = res.data.results;
+                      });
+                    },
+      onChangeEventHandler(index) {
+        this.schedule[index].value = !this.schedule[index].value
+            let tripMatterTime=document.getElementById('trip-matter-time')
+            let tripMatterContent=document.getElementById('trip-matter-content')
+          // console.log(this.schedule[index].value);
+          // console.log(index)
+        if(!this.schedule[index].value){
+            tripMatterTime.style.color="#999"
+            tripMatterContent.style.color="#999"
         }else{
-            tripMatter1Time.style.color="#468ce6"
-            tripMatter1Content.style.color="red"
+            tripMatterTime.style.color="#468ce6"
+            tripMatterContent.style.color="red"
         }
-      }
+      },
+      del(index){
+        //获取这一条信息的sid;
+        let sid =this.schedule[index].sid;
+        let object={
+                sid:sid
+              }
+        console.log(object);
+        //将获得的sid发送到数据库
+        this.axios.post('/schedule',this.qs.stringify(object)).then(res=>{
+            if(res.data.code==200){
+                    this.$messagebox.alert("删除成功")
+                        this.getData();///?????????????????????????????
+            }
+        })
+      // this.schedule.splice(index,1);
+      },
+      
+    },
+    mounted(){
+      this.getData()
     }
   }
 </script>
@@ -98,6 +154,7 @@
   font-size:0.01rem;
   /* text-align: left; */
   line-height: 1rem;
+  padding-left:0.3rem ;
 }
 .kl-calendar_day-festival{
   padding-left: 0 !important;
@@ -134,47 +191,64 @@
 .kl-calendar_render-info{
   color: #fff !important;
 }
-.trip-matter{
-  width: 25rem;
-  height: 15rem;
-  border: 0.1rem solid #ddd;
-  border-radius: 0.5rem;
-  position: absolute;
-  top: 26rem;
-}
+
 .trip-matter h1{
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
   font-size: 1.3rem;
 }
-.trip-matter .hr{
+.trip-matter-all .hr{
+  /* position: absolute; */
+  width: 23rem;
+  margin-top: 1rem;
+  top: 15rem;
+  border-bottom: 0.1rem solid #ddd;
+}
+/* .matter{
+   width: 23rem;
+  height: 14rem;
+  top: 26rem;
+  left: 0.4rem;
+  padding: 1rem;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+} */
+.trip-matter-all{
   position: absolute;
   width: 23rem;
-  top: 3rem;
-  left: 1.1rem;
-  border-bottom: 0.1rem solid #ddd;
-}
-.trip-matter1{
-  position: absolute;
-  width: 21rem;
-  top: 3rem;
-  left: 1.1rem;
-  border-bottom: 0.1rem solid #ddd;
+  top: 26rem;
+  left: 0.4rem;
   padding: 1rem;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
 }
-#trip-matter1-time{
+.trip-matter{
+  width: 23rem;
+  height: 3rem;
+  top: 2rem;
+  left: 0.4rem;
+  padding: 1rem;
+  border-bottom: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+}
+#trip-matter-time{
   font-size: 2rem;
-  color:  #ddd;
+  color:  #999;
 }
-#trip-matter1-content{
+#trip-matter-content{
   font-size: 1rem;
-  color: #ddd;
+  color: #999;
 }
 .toggle-button1{
   position:absolute;
-  top:5rem;
+  top:1.6rem;
   right: 1rem;
 }
-
+.trip .mint-cell-swipe-button{
+  height: 5rem !important;
+  line-height: 5rem !important;
+  }
+.trip .else-data{
+  margin-top: 6rem;
+  margin-left: 8rem;
+  color: #999;
+}
 </style>
