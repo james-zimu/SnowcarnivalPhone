@@ -10,12 +10,12 @@ Vue.prototype.axios = axios;
 //引入qs插件
 import qs from 'qs'
 Vue.prototype.qs = qs;
-//引入按钮组件http://www.wheelsfactory.cn/#/detail?id=137
-//https://github.com/euvl/vue-js-toggle-button
-import ToggleButton from 'vue-js-toggle-button'
-Vue.use(ToggleButton)
-    //引入日期插件http://www.wheelsfactory.cn/#/detail?id=221
-    //https://github.com/kylin-z/vue-calendar
+//引入mintui按钮组件
+import { Switch } from 'mint-ui';
+Vue.component(Switch.name, Switch);
+
+//引入日期插件http://www.wheelsfactory.cn/#/detail?id=221
+//https://github.com/kylin-z/vue-calendar
 import Calendar from 'himmas-vue-calendar'
 Vue.use(Calendar)
     //引入弹窗输入插件

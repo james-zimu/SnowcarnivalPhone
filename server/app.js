@@ -38,7 +38,7 @@ server.use(cors({
 //获取日程接口
 server.get('/schedule', (req, res) => {
     // SQL语句以获取分类表的数据
-    let sql = 'SELECT sid,udate,udetail FROM sc_schedule ORDER BY sid';
+    let sql = 'SELECT sid,uid,udate,udetail FROM sc_schedule ORDER BY sid';
     // 执行SQL语句
     pool.query(sql, (error, results) => {
         if (error) throw error;
@@ -54,23 +54,24 @@ server.post('/schedule', (req, res) => {
     // console.log(udetail, udate);
     // 导入数据库的sql语句
     let sql = 'INSERT INTO sc_schedule(udate,udetail) VALUES(?,?)'
-    pool.query(sql, [udate, udetail], (err, results) => {
+    pool.query(sql, [udate, udetail], (error, results) => {
         // if (error) throw error;
         res.send({ message: 'ok', code: 200 });
     })
 });
 
 //删除前端需要删除的数据选项
-server.post('/schedule', (req, res) => {
+server.post('/scheduledelete', (req, res) => {
     //获取到前端发来的sid值
     let sid = req.body.sid;
     // 删除数据库的sql语句
     console.log(sid);
-    // let sql = 'delete from sc_schedule where sid = "sid"'
-    // pool.delete(sql, [sid], (err, results) => {
-    //     if (error) throw error;
-    //     res.send({ message: 'ok', code: 200 })
-    // })
+    let sql = 'DELETE FROM `sc_schedule` WHERE (sid=?)'
+    pool.query(sql, [sid], (error, results) => {
+        console.log(sql);
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200 })
+    })
 });
 // 指定服务器对象监听的端口号
 server.listen(3000, () => {

@@ -2,7 +2,10 @@
 <template>
    <div class="trip">
      <!-- 导入日历组件 -->
-      <kl-calendar height="25rem" width="23rem" :show-festival="false" :show-term="false" @date-click="dateClick"/>
+      <kl-calendar height="25rem" width="23rem" 
+      :show-festival="false" 
+      :show-term="false" 
+      @date-click="dateClick"/>
     <!-- 待办事项 -->
       <div  class="trip-matter-all">
         <h1>待办事项</h1>
@@ -24,16 +27,11 @@
             ]">
           <!-- 防止mint ui对样式结构进行破坏 -->
           <div class="matter">
-            <div class="trip-matter">
-              <p id="trip-matter-time">{{item.udate}}</p>
-              <p id="trip-matter-content">{{item.udetail}}</p>
+            <div class="trip-matter"> 
+              <p class="trip-matter-time">{{item.udate}}</p>
+              <p class="trip-matter-content">{{item.udetail}}</p>
             </div>
-            <!-- 添加开关 -->
-          <span  class="toggle-button1" style="padding: 5px">
-          <toggle-button
-            :labels="true" 
-            @change="onChangeEventHandler(index)"/>
-          </span>
+            
          </div>
         </mt-cell-swipe>
         </div>
@@ -41,10 +39,12 @@
   </div>
 </template>
 <script>
+
   export default {
     data(){
       return{
-        schedule:[]
+        schedule:[],
+        value:true
       }
     },
     name: 'App',
@@ -104,36 +104,23 @@
                         // 将服务器返回的数据赋予schedule变量
                         this.schedule = res.data.results;
                       });
-                    },
-      onChangeEventHandler(index) {
-        this.schedule[index].value = !this.schedule[index].value
-            let tripMatterTime=document.getElementById('trip-matter-time')
-            let tripMatterContent=document.getElementById('trip-matter-content')
-          // console.log(this.schedule[index].value);
-          // console.log(index)
-        if(!this.schedule[index].value){
-            tripMatterTime.style.color="#999"
-            tripMatterContent.style.color="#999"
-        }else{
-            tripMatterTime.style.color="#468ce6"
-            tripMatterContent.style.color="red"
-        }
       },
       del(index){
         //获取这一条信息的sid;
-        let sid =this.schedule[index].sid;
-        let object={
-                sid:sid
-              }
-        console.log(object);
-        //将获得的sid发送到数据库
-        this.axios.post('/schedule',this.qs.stringify(object)).then(res=>{
+        this.$messagebox.confirm(`确认要删除当天的行程么?`).then(action => {
+          //将获得的sid发送到数据库
+          let sid =this.schedule[index].sid;
+          let object={ 
+            sid:sid
+              };
+            console.log(object);
+            this.axios.post('/scheduledelete',this.qs.stringify(object)).then(res=>{
             if(res.data.code==200){
                     this.$messagebox.alert("删除成功")
                         this.getData();///?????????????????????????????
             }
         })
-      // this.schedule.splice(index,1);
+        });
       },
       
     },
@@ -143,11 +130,11 @@
   }
 </script>
 <style>
-#trip{
+/* .trip{
     width:23rem;
     padding-left: 0.35rem ;
     position: relative;
-}
+} */
 /* 设置日历字体大小/ */
 .kl-calendar{
   width: 25rem !important;
@@ -164,7 +151,7 @@
 }
 .kl-calendar_day-box{
   padding: 0.5rem !important;
-  background: url('../../public/snow.png') no-repeat top right !important;
+  /* background: url('../../public/snow.png') no-repeat top right !important; */
   background-size:20px !important;
 
 } 
@@ -202,15 +189,6 @@
   top: 15rem;
   border-bottom: 0.1rem solid #ddd;
 }
-/* .matter{
-   width: 23rem;
-  height: 14rem;
-  top: 26rem;
-  left: 0.4rem;
-  padding: 1rem;
-  border: 0.1rem solid #ddd;
-  border-radius: 0.5rem;
-} */
 .trip-matter-all{
   position: absolute;
   width: 23rem;
@@ -222,30 +200,31 @@
 }
 .trip-matter{
   width: 23rem;
-  height: 3rem;
+  height: 2rem;
   top: 2rem;
   left: 0.4rem;
+  line-height: 1.5rem;
   padding: 1rem;
   border-bottom: 0.1rem solid #ddd;
   border-radius: 0.5rem;
 }
-#trip-matter-time{
-  font-size: 2rem;
-  color:  #999;
+
+.trip-matter-content{
+  font-size: 1.2rem;
+  color:  rgb(255, 0, 0);
 }
-#trip-matter-content{
-  font-size: 1rem;
-  color: #999;
+.trip-matter-time{
+  font-size: 1.5rem;
+  color: #468ce6;
 }
-.toggle-button1{
+.trip .toggle-button1{
   position:absolute;
-  top:1.6rem;
+  top:1.2rem;
   right: 1rem;
 }
 .trip .mint-cell-swipe-button{
-  height: 5rem !important;
-  line-height: 5rem !important;
-  }
+  line-height: 4rem;
+}
 .trip .else-data{
   margin-top: 6rem;
   margin-left: 8rem;
