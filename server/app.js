@@ -36,6 +36,7 @@ server.use(cors({
 
 
 
+
 //获取租车数据库中数据并发送到web服务器
 server.get('/carrental', (req, res) => {
     // SQL语句以获取分类表的数据
@@ -200,6 +201,72 @@ server.post('/schedule', (req, res) => {
 });
 
 
+
+server.get("/fcategory", (req, res) => {
+    let sql = 'SELECT lid,images,title,content FROM testing ORDER BY lid';
+    pool.query(sql, (error, results) => {
+        if (error) throw error;
+        res.send({
+            message: 'ok',
+            code: 200,
+            results: results
+        })
+    })
+})
+
+// 用户登录接口
+server.post('/login', (req, res) => {
+    //获取用户名和密码信息
+    let uname = req.body.username;
+    let upwd = req.body.password;
+    //SQL语句
+    let sql = 'SELECT uid,uname,photo FROM test2 WHERE uname=? AND upwd=?';
+    pool.query(sql, [uname, upwd], (error, results) => {
+        if (error) throw error;
+        if (results.length == 0) { //登陆失败
+            res.send({ message: 'login failed', code: 201 });
+        } else {
+            res.send({ message: 'ok', code: 200, result: results[0] });
+            console.log("欢迎登录")
+        }
+    });
+});
+
+//保存用户的评论
+server.post('/remark', (req, res) => {
+    let uname = req.body.uname;
+    let remcontent = req.body.msg;
+    let photo = req.body.photo;
+    let number = req.body.number;
+    let sql = 'INSERT INTO test4(number,uname,photo,remcontent) VALUES(?,?,?,?)';
+    pool.query(sql, [number, uname, photo, remcontent], (error, result) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, result: result });
+    });
+})
+
+// 得到用户发表的文章
+server.get('/article', (req, res) => {
+    // console.log(req.query.id)
+    let number = req.query.id;
+    let sql = 'SELECT uname,photo,image,content FROM test3 WHERE NUMBER=?';
+    pool.query(sql, [number], (error, result) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, result: result })
+    })
+
+})
+
+//向数据库请求当前网页的留言与评论内容
+server.get('/beforrem', (req, res) => {
+    // console.log(req.query.number)
+    let number = req.query.number;
+    let sql = 'SELECT uname,photo,remcontent FROM test4 WHERE NUMBER=?';
+    pool.query(sql, [number], (error, result) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, result: result })
+    })
+})
 
 // 指定服务器对象监听的端口号
 server.listen(3000, () => {

@@ -3,10 +3,13 @@
    License: none (public domain)
 */
 
+
+/* 自定义图标 */
+
 @font-face {
     font-family: 'iconfont';
-    src: url('../icon/iconfont.eot');
-    src: url('../icon/iconfont.eot?#iefix') format('embedded-opentype'), url('../icon/iconfont.woff2') format('woff2'), url('../icon/iconfont.woff') format('woff'), url('../icon/iconfont.ttf') format('truetype'), url('../icon/iconfont.svg#iconfont') format('svg');
+    src: url('../../src/assets/icon/iconfont.eot');
+    src: url('../../src/assets/icon/iconfont.eot?#iefix') format('embedded-opentype'), url('../../src/assets/icon/iconfont.woff2') format('woff2'), url('../../src/assets/icon/iconfont.woff') format('woff'), url('../../src/assets/icon/iconfont.ttf') format('truetype'), url('../../src/assets/icon/iconfont.svg#iconfont') format('svg');
 }
 
 .iconfont {

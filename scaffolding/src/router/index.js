@@ -5,6 +5,9 @@ import ShopCar from '../views/ShopCar.vue'
 import CarRental from '../views/CarRental.vue'
 import Hotel from "../views/Hotel.vue"
 import test from '../views/test.vue'
+import index from '../views/index.vue'
+import remark from '../views/Remark.vue'
+import login from '../views/login.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +29,23 @@ const routes = [{
     {
         path: "/hotel",
         component: Hotel
+    },
+
+    {
+        path: '/login',
+        component: login
+    },
+    {
+        path: '/remark',
+        component: remark
+    },
+    {
+        path: '/index',
+        component: index
+    },
+    {
+        path: '/test',
+        component: test
     }
 ]
 
