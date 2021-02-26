@@ -3,6 +3,20 @@
    License: none (public domain)
 */
 
+@font-face {
+    font-family: 'iconfont';
+    src: url('../icon/iconfont.eot');
+    src: url('../icon/iconfont.eot?#iefix') format('embedded-opentype'), url('../icon/iconfont.woff2') format('woff2'), url('../icon/iconfont.woff') format('woff'), url('../icon/iconfont.ttf') format('truetype'), url('../icon/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 html,
 body,
 div,
@@ -496,4 +510,28 @@ textarea {
     background: #ccc;
     color: #000;
     padding: 0.2em 0;
+}
+
+
+/* 清除浮动  解决高度塌陷  子级浮动父级就要清除浮动*/
+
+.clearfix::before {
+    content: " ";
+    display: table;
+}
+
+.clearfix::after {
+    content: "";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+}
+
+
+/* 解决清除浮动在IE浏览器中的兼容问题 */
+
+.clearfix {
+    zoom: 1;
 }
