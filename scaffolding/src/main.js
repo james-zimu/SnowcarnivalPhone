@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import qs from 'qs';
+Vue.prototype.qs = qs;
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
 Vue.prototype.axios = axios;
