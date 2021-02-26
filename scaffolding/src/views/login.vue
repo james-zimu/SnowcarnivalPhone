@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="all">
+        <div class="login">
             <!-- 顶部导航 -->
             <div id="header">
-                <router-link to="/register" style="color:white">注册</router-link>
+                <router-link to="/register" style="color:white">< 注册</router-link>
             </div>
             <!-- 内容区域 -->
             <div class="container">
@@ -123,7 +123,7 @@ export default {
                 let userString = JSON.stringify(res.data.result)
                 window.sessionStorage.setItem('user',userString)
                 //登录成功
-                this.$router.push('/remark');
+                this.$router.push('/register');
                 }
                 if(res.data.code == 201){//登陆失败
                 this.$messagebox('提示信息','用户名或密码错误')
@@ -135,53 +135,60 @@ export default {
 }
 </script>
 <style scoped>
-    #header{
+    .login #header{
         background-color:#458ce6;
         height:2.5rem;
         font-size:0.9375rem;
         line-height:2.5rem;
         padding-left: 1.25rem;
     }
-    .container{
+    .login .container{
         padding: 1.25rem;
     }
-    .user-password{
+    .login .user-password{
         font-size: 1.5625rem;
         margin:1.25rem 0;
     }
-    .reg{
-        width: 96%;
-        border-radius: 5%;
+    .login .reg{
+        width: 21rem;
+        border-radius: 0.5rem;
         background-color: rgb(216, 213, 213);
         color: gray;
         height: 2.5rem;
         margin-top:1.25rem ;
         border: 0px;
+        display: block;
     }
-    .phone{
+    .login .phone{
         font-size: 0.8125rem;
         display: inline-block;
         margin-top: 1rem;
     }
-    a{
+    .login a{
         color:black
     }
-    .phone-right{
+    .login .phone-right{
         margin-left:8rem;
     }
-    .reg-way{
-        margin-top:18rem ;
+    .login .reg-way{
+        margin-top:17rem ;
         position: relative;
     }
-    .iconfont{
-        font-size: 20px;
+    .login .iconfont{
+        font-size: 1.3rem
     }
-    .agree{
+    .login .agree{
         font-size: 0.1rem;
         margin-top: 1rem;
         margin-left:1rem ;
     }
-    .upwd{
-        border-bottom:1px solid gray
+    .login .upwd{
+        border-bottom:0.1rem solid gray
     }
 </style>
+
+
+
+
+
+

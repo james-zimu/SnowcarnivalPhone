@@ -8,6 +8,9 @@ import test from '../views/test.vue'
 import index from '../views/index.vue'
 import remark from '../views/Remark.vue'
 import login from '../views/login.vue'
+import register from '../views/register.vue'
+import hotel_details from '../views/hotel_details.vue'
+import ticket from '../views/ticket.vue'
 
 Vue.use(VueRouter)
 
@@ -30,11 +33,6 @@ const routes = [{
         path: "/hotel",
         component: Hotel
     },
-
-    {
-        path: '/login',
-        component: login
-    },
     {
         path: '/remark',
         component: remark
@@ -44,9 +42,21 @@ const routes = [{
         component: index
     },
     {
-        path: '/test',
-        component: test
-    }
+        path: '/ticket',
+        component: ticket
+    },
+    {
+        path: '/login',
+        component: login
+    },
+    {
+        path: '/register',
+        component: register
+    },
+    {
+        path: '/hotel_details',
+        component: hotel_details
+    },
 ]
 
 const router = new VueRouter({
