@@ -2,11 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Trip from '../views/Trip.vue'
 import ShopCar from '../views/ShopCar.vue'
+import CarRental from '../views/CarRental.vue'
 import test from '../views/test.vue'
 
 Vue.use(VueRouter)
 
 const routes = [{
+        path: '/carrental',
+        component: CarRental
+    }, {
         path: '/shopcar',
         component: ShopCar
     }, {

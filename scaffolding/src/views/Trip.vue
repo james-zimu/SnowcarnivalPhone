@@ -110,6 +110,7 @@
         this.$messagebox.confirm(`确认要删除当天的行程么?`).then(action => {
           //将获得的sid发送到数据库
           let sid =this.schedule[index].sid;
+          console.log(this.schedule);
           let object={ 
             sid:sid
               };
@@ -117,7 +118,7 @@
             this.axios.post('/scheduledelete',this.qs.stringify(object)).then(res=>{
             if(res.data.code==200){
                     this.$messagebox.alert("删除成功")
-                        this.getData();///?????????????????????????????
+                        this.getData();
             }
         })
         });

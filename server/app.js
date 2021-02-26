@@ -46,6 +46,19 @@ server.get('/schedule', (req, res) => {
         // console.log(results);
     });
 });
+
+//获取租车接口接口
+server.get('/carrental', (req, res) => {
+    // SQL语句以获取分类表的数据
+    let sql1 = 'SELECT rid,img,price,classification FROM sc_carrental1 ORDER BY rid';
+    // 执行SQL语句
+    pool.query(sql1, (error, results) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, results: results });
+        // console.log(results);
+    });
+});
+
 //完成日程添加接口
 server.post('/schedule', (req, res) => {
     //获取时间信息和输入信息
