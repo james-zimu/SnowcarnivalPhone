@@ -104,7 +104,7 @@
     .mapnav .nav .option a:not(:last-child){
         margin-right: 0.3rem;
     }
-    .BMap_cpyCtrl span{
+    .mapnav .BMap_cpyCtrl span{
         display: inline-block;
     }
     .mapnav .nav .option .bg{
@@ -208,7 +208,7 @@ export default {
                 _this.bgcolor5 = false;
             };
             this.shopping = function() {
- 	            var myKeys = ["美食"]; //设置需要检索的内容
+ 	            var myKeys = ["购物"]; //设置需要检索的内容
                 map.clearOverlays(); //清除上一次检索的标记
 	            var local = new BMapGL.LocalSearch(map, {
 	            	renderOptions:{
@@ -227,7 +227,7 @@ export default {
                 _this.bgcolor5 = true;
             };
             this.finefood = function() {
- 	            var myKeys = ["购物"]; //设置需要检索的内容
+ 	            var myKeys = ["美食"]; //设置需要检索的内容
                 map.clearOverlays(); //清除上一次检索的标记
 	            var local = new BMapGL.LocalSearch(map, {
 	            	renderOptions:{
