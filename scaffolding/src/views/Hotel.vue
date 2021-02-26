@@ -16,27 +16,29 @@
               <a class="left-img-box" href="http://www.baidu.com">
                 <p>{{ Hotel[0].title }}</p>
                 <div class="left-img">
-                  <img src="snow.png" />
+                  <img
+                    src="https://pic1.zhimg.com/v2-3be05963f5f3753a8cb75b6692154d4a_1440w.jpg?source=172ae18b"
+                  />
                 </div>
               </a>
               <a class="right-img-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[1].title }}</p>
-                <div><img src="snow.png" alt="" /></div
-              ></a>
+                <div class="right-img"><img src="snow.png" alt="" /></div>
+              </a>
             </div>
             <div class="bottom-flex">
               <a class="bottom-left-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[2].title }}</p>
-                <div><img src="snow.png" alt="" /></div
-              ></a>
+                <div class="bottom-left"><img src="snow.png" alt="" /></div>
+              </a>
               <a class="bottom-center-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[3].title }}</p>
-                <div><img src="snow.png" alt="" /></div
-              ></a>
+                <div class="bottom-center"><img src="snow.png" alt="" /></div>
+              </a>
               <a class="bottom-right-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[4].title }}</p>
-                <div><img src="snow.png" alt="" /></div
-              ></a>
+                <div class="bottom-right"><img src="snow.png" alt="" /></div>
+              </a>
             </div>
           </div>
         </div>
@@ -128,9 +130,35 @@ export default {
   border-radius: 5%;
   background-color: #fff;
 }
+.Hotel .left-img {
+  width: 13rem;
+  height: 4rem;
+  margin-left: 0.5rem;
+}
+.Hotel .left-img > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+}
+.Hotel .right-img,
+.bottom-left,
+.bottom-center,
+.bottom-right {
+  margin-left: 0.3rem;
+  width: 6rem;
+  height: 4rem;
+}
+.Hotel .right-img > img,
+.bottom-left > img,
+.bottom-center > img,
+.bottom-right > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+}
 .Hotel p {
   color: black;
-  padding: 0.6rem;
+  padding: 0.5rem;
 }
 .Hotel .right-img-box {
   display: block;

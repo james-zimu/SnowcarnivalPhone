@@ -14,6 +14,7 @@ Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 //引入qs插件
 import qs from 'qs'
+//为vue原型链对象添加qs方法，使vue的子对象可以调用该方法
 Vue.prototype.qs = qs;
 //引入mintui按钮组件
 import { Switch } from 'mint-ui';

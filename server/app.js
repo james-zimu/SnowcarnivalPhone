@@ -7,6 +7,8 @@ const mysql = require('mysql');
 //加载body-parser模块
 const bodyParser = require('body-parser')
 
+// 加载CORS模块
+const cors = require('cors');
 
 // 创建MySQL连接池
 const pool = mysql.createPool({
@@ -25,10 +27,6 @@ const server = express();
 server.use(bodyParser.urlencoded({
     extended: false
 }));
-
-
-// 加载CORS模块
-const cors = require('cors');
 
 // 使用CORS中间件
 server.use(cors({
