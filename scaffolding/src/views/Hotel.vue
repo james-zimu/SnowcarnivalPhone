@@ -16,28 +16,34 @@
               <a class="left-img-box" href="http://www.baidu.com">
                 <p>{{ Hotel[0].title }}</p>
                 <div class="left-img">
-                  <img
-                    src="https://pic1.zhimg.com/v2-3be05963f5f3753a8cb75b6692154d4a_1440w.jpg?source=172ae18b"
-                  />
+                  <img src="https://urlify.cn/uYVBzu" />
                 </div>
               </a>
               <a class="right-img-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[1].title }}</p>
-                <div class="right-img"><img src="snow.png" alt="" /></div>
+                <div class="right-img">
+                  <img src="https://urlify.cn/jq6VRr" alt="" />
+                </div>
               </a>
             </div>
             <div class="bottom-flex">
               <a class="bottom-left-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[2].title }}</p>
-                <div class="bottom-left"><img src="snow.png" alt="" /></div>
+                <div class="bottom-left">
+                  <img src="https://urlify.cn/AfERzy" alt="" />
+                </div>
               </a>
               <a class="bottom-center-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[3].title }}</p>
-                <div class="bottom-center"><img src="snow.png" alt="" /></div>
+                <div class="bottom-center">
+                  <img src="https://urlify.cn/7beuee" alt="" />
+                </div>
               </a>
               <a class="bottom-right-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[4].title }}</p>
-                <div class="bottom-right"><img src="snow.png" alt="" /></div>
+                <div class="bottom-right">
+                  <img src="https://urlify.cn/jQVBJb" alt="" />
+                </div>
               </a>
             </div>
           </div>
@@ -47,22 +53,13 @@
           <div class="bottom-title">{{ title }}</div>
           <div class="bottom-box">
             <a class="bottomer-left" href="http://www.baidu.com">
-              <img
-                src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
-                alt=""
-              />
+              <img src="https://urlify.cn/uIJfuq" alt="" />
             </a>
             <a class="bottomer-center" href="http://www.baidu.com">
-              <img
-                src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
-                alt=""
-              />
+              <img src="https://urlify.cn/AvAFb2" alt="" />
             </a>
             <a class="bottomer-right" href="http://www.baidu.com">
-              <img
-                src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
-                alt=""
-              />
+              <img src="https://urlify.cn/6JvIJj" alt="" />
             </a>
           </div>
         </div>
@@ -211,6 +208,7 @@ export default {
   height: 14rem;
   display: flex;
   justify-content: space-between;
+  transition: all 0.5s;
 }
 .Hotel .bottom-box img {
   width: 100%;
@@ -221,18 +219,15 @@ export default {
   display: block;
   width: 32%;
   height: 14rem;
-  background-color: blueviolet;
 }
 .Hotel .bottomer-center {
   display: block;
   width: 32%;
   height: 14rem;
-  background-color: red;
 }
 .Hotel .bottomer-right {
   display: block;
   width: 32%;
   height: 14rem;
-  background-color: blue;
 }
 </style>>
