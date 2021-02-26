@@ -70,7 +70,7 @@ export default {
         // let car1=this.cars1[index];
         let car =this. carprice1[index];
         this.shop.push(car)
-        console.log(this.shop);
+        // console.log(this.shop);
         
     },
     remove(){
@@ -79,12 +79,28 @@ export default {
           for(let i = 0 ;i<=checkbox.length; i++){
             checkbox[i].checked=false;
           }
-          console.log(this.shop);
+          // console.log(this.shop);
       // console.log(checkbox[1]);
     },
     openPlay(){
-          console.log(this.shop);
-        }
+      //获取需要加入购物车的信息
+      let shop = this.shop;
+      let object={
+        shop:shop
+      };
+      console.log(object);
+      // let object={
+      //   shop:1
+      // }
+      // this.axios.post("/carrentalshop",this.qs.stringify(object)).then((res)=>{
+      this.axios.post("/carrentalshop",this.qs.stringify(object,{arrayFormat:'repeat'})).then((res)=>{
+        console.log(this.qs.stringify(object));
+
+        if(res.data.code==200){
+            this.$messagebox.alert("成功加入购物车");
+          }
+      })
+    }
   },
   mounted(){
       //获取url中的动态参数
