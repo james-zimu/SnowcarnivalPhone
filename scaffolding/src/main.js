@@ -2,16 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-//////////////////////////////////////////////////////////
-import { Button } from 'mint-ui';
-Vue.component(Button.name, Button);
-//////////////////////////////////////////////////////
 
 //引人入axios
 import axios from 'axios'
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;
+//引入mintui轮播图组件
+import { Swipe, SwipeItem } from 'mint-ui';
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 //引入qs插件
 import qs from 'qs'
 Vue.prototype.qs = qs;

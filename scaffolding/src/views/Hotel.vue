@@ -3,64 +3,66 @@
     <!-- 导航头区域 -->
     <header>酒店</header>
     <!-- 中心内容区域 -->
-    <div class="container">
-      <!-- 顶部容器 -->
-      <div class="top">
-        <!-- 顶部标题 -->
-        <span class="top-title">{{ title }}</span>
-        <!-- 顶部内容容器 -->
-        <div class="imgs-box">
-          <!-- 顶部左边区域容器 -->
-          <div class="top-flex">
-            <a class="left-img-box" href="http://www.baidu.com">
-              <p>{{ Hotel[0].title }}</p>
-              <div class="left-img">
-                <img src="snow.png" />
-              </div>
-            </a>
-            <a class="right-img-box" href="http://www.baidu.com"
-              ><p>{{ Hotel[1].title }}</p>
-              <div><img src="snow.png" alt="" /></div
-            ></a>
-          </div>
-          <div class="bottom-flex">
-            <a class="bottom-left-box" href="http://www.baidu.com"
-              ><p>{{ Hotel[2].title }}</p>
-              <div><img src="snow.png" alt="" /></div
-            ></a>
-            <a class="bottom-center-box" href="http://www.baidu.com"
-              ><p>{{ Hotel[3].title }}</p>
-              <div><img src="snow.png" alt="" /></div
-            ></a>
-            <a class="bottom-right-box" href="http://www.baidu.com"
-              ><p>{{ Hotel[4].title }}</p>
-              <div><img src="snow.png" alt="" /></div
-            ></a>
+    <div class="all">
+      <div class="container">
+        <!-- 顶部容器 -->
+        <div class="top">
+          <!-- 顶部标题 -->
+          <span class="top-title">{{ title }}</span>
+          <!-- 顶部内容容器 -->
+          <div class="imgs-box">
+            <!-- 顶部左边区域容器 -->
+            <div class="top-flex">
+              <a class="left-img-box" href="http://www.baidu.com">
+                <p>{{ Hotel[0].title }}</p>
+                <div class="left-img">
+                  <img src="snow.png" />
+                </div>
+              </a>
+              <a class="right-img-box" href="http://www.baidu.com"
+                ><p>{{ Hotel[1].title }}</p>
+                <div><img src="snow.png" alt="" /></div
+              ></a>
+            </div>
+            <div class="bottom-flex">
+              <a class="bottom-left-box" href="http://www.baidu.com"
+                ><p>{{ Hotel[2].title }}</p>
+                <div><img src="snow.png" alt="" /></div
+              ></a>
+              <a class="bottom-center-box" href="http://www.baidu.com"
+                ><p>{{ Hotel[3].title }}</p>
+                <div><img src="snow.png" alt="" /></div
+              ></a>
+              <a class="bottom-right-box" href="http://www.baidu.com"
+                ><p>{{ Hotel[4].title }}</p>
+                <div><img src="snow.png" alt="" /></div
+              ></a>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- 底部容器 -->
-      <div class="bottom">
-        <div class="bottom-title">{{ title }}</div>
-        <div class="bottom-box">
-          <a href="http://www.baidu.com" class="bottomer-left">
-            <img
-              src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
-              alt=""
-            />
-          </a>
-          <a href="http://www.baidu.com" class="bottomer-center">
-            <img
-              src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
-              alt=""
-            />
-          </a>
-          <a href="http://www.baidu.com" class="bottomer-right">
-            <img
-              src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
-              alt=""
-            />
-          </a>
+        <!-- 底部容器 -->
+        <div class="bottom">
+          <div class="bottom-title">{{ title }}</div>
+          <div class="bottom-box">
+            <a class="bottomer-left" href="http://www.baidu.com">
+              <img
+                src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
+                alt=""
+              />
+            </a>
+            <a class="bottomer-center" href="http://www.baidu.com">
+              <img
+                src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
+                alt=""
+              />
+            </a>
+            <a class="bottomer-right" href="http://www.baidu.com">
+              <img
+                src="https://t7.baidu.com/it/u=3785402047,1898752523&fm=193&f=GIF"
+                alt=""
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -81,11 +83,16 @@ export default {
       ],
     };
   },
-  //在页面挂载后把后台的数据响应到前台
-  mounted() {},
 };
 </script>
 <style>
+.Hotel .all {
+  width: 100%;
+}
+.Hotel .container {
+  margin-right: 3%;
+  margin-left: 3%;
+}
 .Hotel header {
   height: 4rem;
   width: 100%;
@@ -99,7 +106,7 @@ export default {
   display: block;
   text-align: center;
   margin-top: 1rem;
-  font: 900 1.2rem "宋体";
+  font: 900 1.5rem "宋体";
 }
 .Hotel .imgs-box {
   width: 100%;
@@ -115,7 +122,7 @@ export default {
 .Hotel .left-img-box {
   display: block;
   cursor: pointer;
-  width: 61.32%;
+  width: 64%;
   height: 6.5rem;
   margin: 1rem 1.5%;
   border-radius: 5%;
@@ -168,7 +175,7 @@ export default {
 .Hotel .bottom-title {
   text-align: left;
   margin-top: 1rem;
-  font: 900 1.2rem "宋体";
+  font: 900 1.5rem "宋体";
 }
 .Hotel .bottom-box {
   margin-top: 1rem;
@@ -177,17 +184,17 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.Hotel .bottom-box img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+}
 .Hotel .bottomer-left {
   display: block;
   width: 32%;
   height: 14rem;
   background-color: blueviolet;
 }
-.Hotel .bottom-box img {
-  width: 100%;
-  height: 100%;
-}
-
 .Hotel .bottomer-center {
   display: block;
   width: 32%;
