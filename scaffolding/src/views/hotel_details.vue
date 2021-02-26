@@ -2,9 +2,9 @@
     <div class="hotel_details">
         <mt-header title="酒店详情"></mt-header>
         <div class="container">
-            <div  class="details" v-for="(item,index) in list" :key="index">
+            <div  class="details" v-for="(item,index) in push" :key="index">
                 <div>
-                    <a href="#"><img :src="item.url" alt="" v-model="hotel_pic"></a>
+                    <a href="#"><img src="../../public/gray.png" alt="" v-model="hotel_pic"></a>
                 </div>
                 <div class="title">
                     <div class="title mlf7" >
@@ -153,68 +153,18 @@ export default {
             hotel_pic:"",
             hotel_name:"",
             count:"",
-            list:[{
-                title:'郑州丽晶酒店双人下午茶',
-                comment:'4.6',
-                number:'1309',
-                product_details:'老上海风情主题双人下午茶',
-                price:'258',
-                full:'售空',
-                url:a1,
-                family_id:'购物车-酒店信息'
-            },
-            {
-                title:'冰雪主题套餐',
-                comment:'4.0',
-                number:'139',
-                product_details:'冰激凌',
-                price:'130',
-                full:'',
-                url:a1,
-                family_id:'购物车-酒店信息'
-            },
-            {
-                title:'巨无霸冰激凌',
-                comment:'4.6',
-                number:'999',
-                product_details:'印度尼西亚风情套餐',
-                price:'258',
-                full:'',
-                url:a1,
-                family_id:'购物车-酒店信息'
-            },
-            {
-                title:'我实在编不出来了的套餐',
-                comment:'4.6',
-                number:'1309',
-                product_details:'火锅？',
-                price:'999',
-                full:'',
-                url:a1,
-                family_id:'购物车-酒店信息'
-            },
-
-            {
-                title:'不知道名字的好吃东西',
-                comment:'4.2',
-                number:'658',
-                product_details:'随便吃 免费',
-                price:'100',
-                full:'',
-                url:a1,
-                family_id:'购物车-酒店信息'
-            },
-            {
-                title:'终于最后一个套餐了',
-                comment:'0',
-                number:'99',
-                product_details:'方便面行么··',
-                price:'998',
-                full:'',
-                url:a1,
-                family_id:'购物车-酒店信息'
-            },
-            ]
+            // list:[{
+            //     title:'郑州丽晶酒店双人下午茶',
+            //     comment:'4.6',
+            //     number:'1309',
+            //     product_details:'老上海风情主题双人下午茶',
+            //     price:'258',
+            //     full:'售空',
+            //     url:a1,
+            //     family_id:'购物车-酒店信息'
+            // },
+            // ],
+            push:""
         }
     },
     methods:{
@@ -224,11 +174,11 @@ export default {
             // console.log(index);
             //获取信息
             let object={
-                title:this.list[index].title,
+                title:this.push[index].title,
                 // hotel_pic:this.list[index].url,
-                price:this.list[index].price,
-                product_details:this.list[index].product_details,
-                family_id:this.list[index].family_id
+                price:this.push[index].price,
+                product_details:this.push[index].product_details,
+                family_id:this.push[index].family_id
             }
             console.log(object);
             //传信息
@@ -247,6 +197,12 @@ export default {
                 }
             })
         }
+    },
+    mounted(){
+        let index=this.index;
+        this.axios.get('/hotel',{params:{index:index}}).then(res=>{
+            this.push=res.data.results
+        })
     }
 }
 </script>

@@ -1,14 +1,15 @@
+
 <template>
     <div >
         <div class="ticket">
             <mt-header title="门 票"></mt-header>
             <div class="container">
-                <div class="details" v-for="(item,index) in list">
+                <div class="details" v-for="(item,index) in push" :key="index">
                     <div slot="left">
                         <a href="#"><img src="../../public/gray.png" alt=""></a>
                     </div>
                 <div class="details-word">
-                    <div class="title"><a href="#" class="black">{{item.label}}</a> </div>
+                    <div class="title"><a href="#" class="black">{{item.title}}</a> </div>
                     <div class="mt7 flx">
                         <a href="#" class="gray blue">{{item.comment}}</a>
                         <a href="#" class="gray mlt2">{{item.number}}条点评</a>
@@ -16,7 +17,7 @@
                     <div>
                         <a href="#" class="red mt7">{{item.top}}</a>
                     </div>
-                    <div class="gray mt7"><a href="#" class="gray" style="margin-left:-1rem">距离您{{item.adress}}公里</a>|<a href="#" class="gray">{{item.where}}</a> </div>
+                    <div class="gray mt7"><a href="#" class="gray" style="margin-left:-1rem">距离您{{item.address}}公里</a>|<a href="#" class="gray">{{item.city}}</a> </div>
                     <div class="flx">
                         <a class="bt-buy blue mt7 mlt2">{{item.tips1}}</a>
                         <a class="gray mt7 mlt2" href="#">{{item.tips2}}</a>
@@ -129,101 +130,27 @@
 }
 </style>
 <script>
-import a1 from '../../public/eye.png'
+// import a1 from '../../public/eye.png'
 export default {
     data(){
         return{
-            		list: [{ //图文列表
-                    label: '银基冰雪世界',
-                    comment:'4.6分',
-                    number:'1309',
-                    top:'',
-                    adress:'33.9',
-                    where:'新密',
-                    tips1:'随买随用',
-                    tips2:'亲子同乐',
-                    tips3:'游乐园',
-                    itemDetails:'项目|',
-                    play:'冰雪海盗船',
-                    price:'178',
-                    url: a1,
-                    family_id:'购物车-门票信息'
-				}, {
-                    label: '皇帝千古情',
-                    comment:'4.7分',
-                    number:'498',
-                    top:'华中地区热点景点排名第2名',
-                    adress:'19.1',
-                    where:'新郑',
-                    tips1:'可订今日',
-                    tips2:'亲子同乐',
-                    tips3:'演出',
-                    itemDetails:'',
-                    play:'',
-                    price:'100',
-                    url: a1,
-                    family_id:'购物车-门票信息'
-				}, {
-                    label: '银基皇帝宫御温泉',
-                    comment:'4.8分',
-                    number:'1173',
-                    top:'',
-                    adress:'33.7',
-                    where:'新密',
-                    tips1:'随买随用',
-                    tips2:'温泉',
-                    tips3:'',
-                    itemDetails:'项目|',
-                    play:'东南亚风景区',
-                    price:'396',
-                    url: a1,
-                    family_id:'购物车-门票信息'
-				}, {
-                    label: '龙泉国际滑雪场',
-                    comment:'4.3分',
-                    number:'71',
-                    top:'华中地区热点景点排名第1名',
-                    adress:'21.1',
-                    where:'新郑',
-                    tips1:'',
-                    tips2:'',
-                    tips3:'',
-                    itemDetails:'',
-                    play:'去滑雪 滑雪',
-                    price:'998',
-                    url: a1,
-                    family_id:'购物车-门票信息'
-				}, {
-                    label: '嵩山滑雪滑草场',
-                    comment:'4.2分',
-                    number:'135',
-                    top:'华中地区热点景点排名第5名',
-                    adress:'62.7',
-                    where:'登封',
-                    tips1:'',
-                    tips2:'',
-                    tips3:'',
-                    itemDetails:'',
-                    play:'去滑雪 滑雪',
-                    price:'178',
-                    url: a1,
-                    family_id:'购物车-门票信息'
-				}, {
-                    label: '郑州黄河文化公园',
-                    comment:'0分',
-                    number:'9999+',
-                    top:'',
-                    adress:'0',
-                    where:'郑州',
-                    tips1:'不建议买',
-                    tips2:'必坑指南',
-                    tips3:'',
-                    itemDetails:'项目|',
-                    play:'无',
-                    price:'0',
-                    url: a1,
-                    family_id:'购物车-门票信息'
-				}]
+            	// 	list: [{ //图文列表
+                //     label: '银基冰雪世界',
+                //     comment:'4.6分',
+                //     number:'1309',
+                //     top:'',
+                //     adress:'33.9',
+                //     where:'新密',
+                //     tips1:'随买随用',
+                //     tips2:'亲子同乐',
+                //     tips3:'游乐园',
+                //     itemDetails:'项目|',
+                //     play:'冰雪海盗船',
+                //     price:'178',
+                //     url: a1,
+                //     family_id:'购物车-门票信息'
+                // },],
+                push:""
         }
     },
         methods:{
@@ -232,10 +159,10 @@ export default {
             let  index=e.target.value
             // console.log(index);
             let object={
-                title:this.list[index].label,
+                title:this.push[index].title,
                 // hotel_pic:this.list[index].url,
-                price:this.list[index].price,
-                family_id:this.list[index].family_id
+                price:this.push[index].price,
+                family_id:this.push[index].family_id
             }
             // console.log(object);
             this.axios.post('/addcar',this.qs.stringify(object)).then(res=>{
@@ -245,6 +172,13 @@ export default {
                 }
             })
         }
+    },
+        mounted(){
+        let index=this.index;
+        this.axios.get('/ticket',{params:{index:index}}).then(res=>{
+            this.push=res.data.results
+            console.log(this.push);
+        })
     }
 }
 </script>

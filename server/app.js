@@ -34,21 +34,66 @@ server.use(cors({
     origin: ['http://localhost:8080', 'http://127.0.0.1:8080']
 }));
 //添加到购物车接口
+// server.post('/addcar',(req,res)=>{
+//     //获取酒店名字 照片 价格 产品详情
+//     let title=req.body.title;
+//     // let details=req.body.hotel_pic;
+//     let price=req.body.price;
+//     let family_id=req.body.family_id;
+//     let product_details=req.body.product_details
+//     console.log (family_id,title,price,product_details);
+//     let sql = 'INSERT INTO sc_shop_lay SET family_id=?,title=?,price=?,product_details=?'
+//     pool.query(sql, [family_id,title,price,product_details], (error,result) => {
+//     if(error) throw error
+//     res.send({message:'ok',code:200})
+//     })
+//     });
 server.post('/addcar',(req,res)=>{
     //获取酒店名字 照片 价格 产品详情
     let title=req.body.title;
     // let details=req.body.hotel_pic;
     let price=req.body.price;
     let family_id=req.body.family_id;
+    // let comment=req.body.comment;
+    // let number=req.body.number;
+    // let top=req.body.top;
+    // let address=req.body.address;
+    // let city=req.body.city;
+    // let tips1=req.body.tips1;
+    // let tips2=req.body.tips2;
+    // let tips3=req.body.tips3;
+    // let itemDetails=req.body.itemDetails;
+    // let play=req.body.play;
     let product_details=req.body.product_details
     console.log (family_id,title,price,product_details);
-    let sql = 'INSERT INTO sc_shop_test SET family_id=?,title=?,price=?,product_details=?'
+    let sql = 'INSERT INTO sc_car SET family_id=?,title=?,price=?,product_details=?'
     pool.query(sql, [family_id,title,price,product_details], (error,result) => {
     if(error) throw error
     res.send({message:'ok',code:200})
     })
     });
-
+//获取门票的接口
+server.get('/ticket',(req,res)=>{
+    //sql获取购物车表信息
+    let sql='SELECT ticked_id,family_id,title,product_details,price,comment,number,address,city,tips1,tips2,tips3,itemDetails,play,top FROM sc_ticket ORDER BY ticked_id';
+    //执行sql
+    pool.query(sql,(error,results)=>{
+        // console.log(results);
+        if(error) throw error;
+        res.send({message:'ok',code:200,results:results})
+    })
+})
+//获取酒店详情的接口
+server.get('/hotel',(req,res)=>{
+    //sql获取购物车表信息
+    let sql='SELECT hotel_id,family_id,title,product_details,price,comment,number,address,city,tips1,tips2,tips3,itemDetails,play,top FROM sc_hotel ORDER BY hotel_id';
+    //执行sql
+    pool.query(sql,(error,results)=>{
+        console.log(results);
+        if(error) throw error;
+        res.send({message:'ok',code:200,results:results})
+    })
+})
 //用户注册接口
 server.post('/register',(req,res)=>{
     //获取用户名和密码信息 手机号码
@@ -63,7 +108,7 @@ server.post('/register',(req,res)=>{
         if(count==0){
             //将用户名相关信息插入到数据表中
             sql = 'INSERT sc_user(uname,upwd,phone) VALUES(?,MD5(?),?)';
-            console.log(sql);
+            // console.log(sql);
             pool.query(sql,[uname,upwd,phone],(error,results)=>{
                 if (error) throw error;
                 res.send({message:'ok',code:200});
@@ -80,7 +125,7 @@ server.post('/login',(req,res)=>{
     let upwd = req.body.password;
     //SQL语句
     let sql = 'SELECT uid,uname,phone FROM sc_user WHERE uname=? AND upwd=MD5(?)';
-    console.log(sql);
+    // console.log(sql);
     pool.query(sql,[uname,upwd],(error,results)=>{
 
         if (error) throw error;
