@@ -82,15 +82,15 @@
               <mt-button @click="marksend" size="small" type="primary">发送</mt-button>
           </div>
             <div class="reamark-btn2">
-                <span class="iconfont">&#xe66a;</span>
+                <span class="iconfont">&#xe52f;</span>
                  <div class="reamark-care rem-footer">
                       121
                 </div>
-                <span class="iconfont">&#xe604;</span>
+                <span class="iconfont">&#xe689;</span>
                  <div class="reamark-care rem-footer">
                       35
                 </div>
-                <span class="iconfont">&#xe620;</span>
+                <span class="iconfont">&#xe508;</span>
                  <div class="reamark-care rem-footer">
                       22
                 </div>

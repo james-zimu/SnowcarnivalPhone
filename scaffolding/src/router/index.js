@@ -5,7 +5,7 @@ import ShopCar from '../views/ShopCar.vue'
 import CarRental from '../views/CarRental.vue'
 import Hotel from "../views/Hotel.vue"
 import test from '../views/test.vue'
-import index from '../views/index.vue'
+import HomePage from '../views/Home_page.vue'
 import remark from '../views/Remark.vue'
 import login from '../views/login.vue'
 import register from '../views/register.vue'
@@ -41,8 +41,8 @@ const routes = [{
         component: remark
     },
     {
-        path: '/index',
-        component: index
+        path: '/HomePage',
+        component: HomePage
     },
     {
         path: '/ticket',

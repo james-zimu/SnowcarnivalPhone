@@ -289,9 +289,9 @@ server.post('/schedule', (req, res) => {
 });
 
 
-
+//首页底部的广告及内容
 server.get("/fcategory", (req, res) => {
-    let sql = 'SELECT lid,images,title,content FROM testing ORDER BY lid';
+    let sql = 'SELECT lid,images,title,content FROM sc_home_page ORDER BY lid';
     pool.query(sql, (error, results) => {
         if (error) throw error;
         res.send({
