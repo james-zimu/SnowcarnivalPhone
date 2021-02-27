@@ -168,7 +168,7 @@ export default {
             this.axios.post('/addcar',this.qs.stringify(object)).then(res=>{
                 console.log(res.data.code);
                 if(res.data.code==200){
-                    alert('添加成功')
+                     this.$messagebox.alert("成功加入购物车")
                 }
             })
         }
