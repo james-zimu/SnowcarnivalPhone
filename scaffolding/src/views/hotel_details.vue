@@ -186,7 +186,7 @@ export default {
                 if(res.data.code==200){
                     console.log(res.data.code);
                     //弹窗成功
-                    alert('添加成功')
+                    this.$messagebox.alert("成功加入购物车");
                     // this.$messagebox.confirm("您是否现在前往购物车","提示信息").then(
                     //     (value)=>{
                     //         this.$router.push('/');

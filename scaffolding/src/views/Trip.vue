@@ -1,6 +1,8 @@
 
 <template>
    <div class="trip">
+     <!-- 返回头 -->
+      <div class="back"><a href="/index"><span class="iconfont">&#xe501;</span>返回</a></div>
      <!-- 导入日历组件 -->
       <kl-calendar height="25rem" width="23rem" 
       :show-festival="false" 
@@ -171,12 +173,14 @@
   width: 23.4rem !important;
 }
 .kl-calendar_tool{
-  margin-right: 2rem !important;
+  margin-right: 0rem !important;
 }
 .kl-calendar_tool-btn{
   color: #fff !important;
 }
 .kl-calendar_render-info{
+  margin-left: 4rem;
+  font-size: 1.5rem !important;
   color: #fff !important;
 }
 
@@ -230,5 +234,17 @@
   margin-top: 6rem;
   margin-left: 8rem;
   color: #999;
+}
+.trip .back{
+  position: absolute;
+  top: 1.4rem;
+  font-size: 1.2rem;
+  color: #fff;
+}
+.trip .back>a{
+  color: #fff;
+}
+.trip .back>span{
+  font-size: 1.2rem;
 }
 </style>

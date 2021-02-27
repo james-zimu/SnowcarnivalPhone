@@ -29,6 +29,7 @@ Vue.use(Calendar)
     //引入弹窗输入插件
     //导入mint-ui
 import MintUI from 'mint-ui';
+// import BaiduMap from 'vue-baidu-map';
 //导入样式文件
 import 'mint-ui/lib/style.min.css';
 // 引入mint ui弹出框样式
@@ -44,9 +45,16 @@ Vue.component(TabContainerItem.name, TabContainerItem);
 import { Checklist } from 'mint-ui';
 
 Vue.component(Checklist.name, Checklist);
+//添加mint ui 头部返回按钮
 
+import { Header } from 'mint-ui';
 
+Vue.component(Header.name, Header);
 
+// Vue.use(BaiduMap, {
+//     /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */
+//     ak: 'nGLvlES6KlFt0NRzn2IKjTYp9aLhinuI'
+// })
 new Vue({
     el: '#app',
     router,

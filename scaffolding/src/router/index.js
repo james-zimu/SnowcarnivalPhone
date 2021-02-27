@@ -11,6 +11,9 @@ import login from '../views/login.vue'
 import register from '../views/register.vue'
 import hotel_details from '../views/hotel_details.vue'
 import ticket from '../views/ticket.vue'
+import UserPage from '../views/UserPage.vue'
+import Community from '../views/Community.vue'
+import MapNav from '../views/MapNav.vue'
 
 Vue.use(VueRouter)
 
@@ -56,10 +59,20 @@ const routes = [{
     {
         path: '/hotel_details',
         component: hotel_details
-    },
+    }, {
+        path: '/userpage',
+        component: UserPage
+    }, {
+        path: '/community',
+        component: Community
+    }, {
+        path: '/mapnav',
+        component: MapNav
+    }
 ]
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 })
 
