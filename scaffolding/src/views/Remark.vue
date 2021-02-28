@@ -3,8 +3,8 @@
   <div class="remark" v-if="!push==''">
       <div class="reamark-header">
         <div class="reamark-back">
-          <router-link  to="/login" slot="left">
-                <mt-button icon="back"></mt-button>
+          <router-link  to="/trip" slot="left">
+               <mt-button icon="back"></mt-button>
             </router-link>
           </div>
           <div class="reamark-logo">

@@ -124,6 +124,7 @@ export default {
                 window.sessionStorage.setItem('user',userString)
                 //登录成功
                 this.$router.push('/register');
+                // this.$router.push('/register');
                 }
                 if(res.data.code == 201){//登陆失败
                 this.$messagebox('提示信息','用户名或密码错误')

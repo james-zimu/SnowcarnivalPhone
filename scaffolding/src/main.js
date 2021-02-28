@@ -50,6 +50,9 @@ Vue.component(Checklist.name, Checklist);
 import { Header } from 'mint-ui';
 
 Vue.component(Header.name, Header);
+//引入foot导航
+import foot from './components/foot.vue'
+Vue.component('foot', foot)
 
 // Vue.use(BaiduMap, {
 //     /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */

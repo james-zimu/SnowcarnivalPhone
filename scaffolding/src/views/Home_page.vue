@@ -45,7 +45,7 @@
     <div class="index-content">
       <ul class="index-serves index-serves1">
         <li class="index-ser1 ">
-          <a class="iconfont " href="javascript:;">
+          <a class="iconfont " href="/hotel">
             <p class="iconfont">&#xe603;</p>
             酒店</a>
         </li>
@@ -68,7 +68,7 @@
           </a>
         </li>
         <li class="index-ser5">
-          <a href="javascript:;">
+          <a href="/community">
             <p class="iconfont">&#xe507;</p>
             攻略/论坛</a
           >
@@ -88,13 +88,13 @@
           >
         </li>
         <li class="index-ser8">
-          <a href="javascript:;">
+          <a href="/mapnav">
             <p class="iconfont">&#xf01f2;</p>
             地图</a
           >
         </li>
         <li class="index-ser9">
-          <a href="javascript:;">
+          <a href="/ticket">
             <p class="iconfont">&#xe504;</p>
             门票/玩乐</a
           >
@@ -120,7 +120,7 @@
           >
         </li>
         <li class="index-ser8">
-          <a href="javascript:;">
+          <a href="/carrental">
             <p class="iconfont">&#xe7ba;</p>
             租车</a
           >
@@ -195,6 +195,7 @@
       </div>
     </div>
   </div>
+    <foot></foot>
   </div>
 </template>
 <script src="../assets/icon/iconfont.js"></script>

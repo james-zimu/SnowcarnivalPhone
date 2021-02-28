@@ -41,7 +41,7 @@ const routes = [{
         component: remark
     },
     {
-        path: '/HomePage',
+        path: '/home_page',
         component: HomePage
     },
     {

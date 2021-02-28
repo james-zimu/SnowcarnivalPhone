@@ -13,7 +13,7 @@
           <div class="imgs-box">
             <!-- 顶部左边区域容器 -->
             <div class="top-flex">
-              <a class="left-img-box" href="http://www.baidu.com">
+              <a class="left-img-box" href="/hotel_details">
                 <p>{{ Hotel[0].title }}</p>
                 <div class="left-img">
                   <img
@@ -21,21 +21,21 @@
                   />
                 </div>
               </a>
-              <a class="right-img-box" href="http://www.baidu.com"
+              <a class="right-img-box" href="/hotel_details"
                 ><p>{{ Hotel[1].title }}</p>
                 <div class="right-img"><img src="snow.png" alt="" /></div>
               </a>
             </div>
             <div class="bottom-flex">
-              <a class="bottom-left-box" href="http://www.baidu.com"
+              <a class="bottom-left-box" href="/hotel_details"
                 ><p>{{ Hotel[2].title }}</p>
                 <div class="bottom-left"><img src="snow.png" alt="" /></div>
               </a>
-              <a class="bottom-center-box" href="http://www.baidu.com"
+              <a class="bottom-center-box" href="/hotel_details"
                 ><p>{{ Hotel[3].title }}</p>
                 <div class="bottom-center"><img src="snow.png" alt="" /></div>
               </a>
-              <a class="bottom-right-box" href="http://www.baidu.com"
+              <a class="bottom-right-box" href="/hotel_details"
                 ><p>{{ Hotel[4].title }}</p>
                 <div class="bottom-right"><img src="snow.png" alt="" /></div>
               </a>

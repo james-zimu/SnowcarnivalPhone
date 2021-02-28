@@ -310,7 +310,7 @@ server.post('/remark', (req, res) => {
     let remcontent = req.body.msg;
     let photo = req.body.photo;
     let number = req.body.number;
-    let sql = 'INSERT INTO test4(number,uname,photo,remcontent) VALUES(?,?,?,?)';
+    let sql = 'INSERT INTO sc_remark(number,uname,photo,content) VALUES(?,?,?,?)';
     pool.query(sql, [number, uname, photo, remcontent], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result });
@@ -321,7 +321,7 @@ server.post('/remark', (req, res) => {
 server.get('/article', (req, res) => {
     // console.log(req.query.id)
     let number = req.query.id;
-    let sql = 'SELECT uname,photo,image,content FROM test3 WHERE NUMBER=?';
+    let sql = 'SELECT uname,photo,image,content FROM sc_share WHERE NUMBER=?';
     pool.query(sql, [number], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result })
@@ -333,7 +333,7 @@ server.get('/article', (req, res) => {
 server.get('/beforrem', (req, res) => {
     // console.log(req.query.number)
     let number = req.query.number;
-    let sql = 'SELECT uname,photo,remcontent FROM test4 WHERE NUMBER=?';
+    let sql = 'SELECT uname,photo,remcontent FROM sc_remark WHERE NUMBER=?';
     pool.query(sql, [number], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result })

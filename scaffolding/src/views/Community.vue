@@ -17,7 +17,7 @@
                     <div class="slide-inner">
                         <div v-for="(list) of community.slice(0,6)" :key="list.cid">
                             <a href="javascript:;" class="hot-img">
-                                <img :src="require('../../' + list.image)" alt="">
+                                <a href="/Remark"><img :src="require('../../' + list.image)" alt=""></a>
                             </a>
                             <a href="javascript:;" class="hot-text">
                                 <p>{{list.title}}</p>

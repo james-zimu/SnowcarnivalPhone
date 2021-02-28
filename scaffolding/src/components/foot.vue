@@ -8,19 +8,19 @@
     </mt-tab-item>
     <mt-tab-item id="two">
            <p class="iconfont">&#xe731;</p>
-       <h4>社区</h4>
+       <h4><a href="/community">社区</a> </h4>
     </mt-tab-item>
     <mt-tab-item id="three">
        <p class="iconfont">&#xe508;</p>
-      <h4>购物车</h4>
+      <h4> <a href="/shopcar">购物车</a></h4>
     </mt-tab-item>
     <mt-tab-item id="four">
        <p class="iconfont">&#xe63e;</p>
-      <h4>行程</h4>
+      <h4><a href="/trip">行程</a> </h4>
     </mt-tab-item>
     <mt-tab-item id="five">
        <p class="iconfont">&#xe502;</p>
-      <h4>我的</h4>
+      <h4><a href="/userpage">我的</a></h4>
     </mt-tab-item>
   </mt-tabbar>
   
