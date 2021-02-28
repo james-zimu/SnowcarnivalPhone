@@ -13,6 +13,9 @@
                 <a :class="{'bg':bgcolor5}" href="javascript:;" @click="shopping()">购物</a>
             </div>
         </div>
+        <a href="/userpage" class="back">
+            <span class="iconfont">&#xe501;</span>
+        </a>
     </div>
 </template>
 <style>
@@ -54,9 +57,18 @@
         transition: 0.3s;
         inset: auto auto 1.75rem 0.6rem !important;
     }
+    .BMap_noprint.BMap_CityListCtrl.anchorTL{
+        inset:  1.4rem auto auto 4rem !important;
+    }
     .contai .BMap_scaleCtrl{
         transition: 0.3s;
         inset:  auto auto 1.75rem 4.6rem !important;
+    }
+    .citylist_popup_main{
+        width: 80% !important;
+    }
+    .citylist_popup_main .city_content_top{
+        display: none;
     }
     .BMap_stdMpZoom .BMap_button_new{
         width: 3rem !important;
@@ -111,6 +123,20 @@
         background: #458ce6;
         color: #fff;
     }
+    .mapnav .back{
+        position: absolute;
+        width: 3rem;
+        height: 3rem;
+        line-height: 3rem;
+        text-align: center;
+        top: 1rem;
+        left: 0.8rem;
+        z-index: 1000;
+    }
+    .mapnav .back span{
+        font-size: 2rem;
+        font-weight: bold;
+    }
 </style>
 <script>
 export default {
@@ -146,6 +172,15 @@ export default {
                 // 控件基于停靠位置的偏移量（可选）
                 offset: new BMapGL.Size(20, 20)
             });
+            // 创建城市选择控件
+            var cityControl = new BMapGL.CityListControl({
+            // 控件的停靠位置（可选，默认左上角）
+            anchor: BMAP_ANCHOR_TOP_LEFT,
+            // 控件基于停靠位置的偏移量（可选）
+            offset: new BMapGL.Size(10, 5)
+            });
+        // 将控件添加到地图上
+        map.addControl(cityControl);
             // 将控件添加到地图上1
             map.addControl(locationControl);
             //添加全部检索点击事件

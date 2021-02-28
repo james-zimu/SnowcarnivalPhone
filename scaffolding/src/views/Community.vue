@@ -75,6 +75,7 @@
                 </div>
             </div>
         </div>
+        <foot></foot>
     </div>
 </template>
 <style>
