@@ -14,7 +14,6 @@ import ticket from '../views/ticket.vue'
 import UserPage from '../views/UserPage.vue'
 import Community from '../views/Community.vue'
 import MapNav from '../views/MapNav.vue'
-
 Vue.use(VueRouter)
 
 const routes = [{
@@ -73,6 +72,7 @@ const routes = [{
 
 const router = new VueRouter({
     mode: 'history',
+    base: process.env.BASE_URL,
     routes
 })
 

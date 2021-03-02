@@ -2,7 +2,11 @@
 <template>
     <div >
         <div class="ticket">
-            <mt-header title="门 票"></mt-header>
+            <mt-header class="header" title="嘉年华门票">
+                <router-link to="/shopcar" slot="left">
+                <mt-button class="zhuce" icon="back">返回</mt-button>
+                </router-link>
+            </mt-header>
             <div class="container">
                 <div class="details" v-for="(item,index) in push" :key="index">
                     <div slot="left">
@@ -40,12 +44,22 @@
     </div>
 </template>
 <style>
+.ticket .header{
+    height: 3rem;
+    width: 100%;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #468ce6;
+  }
 .ticket .container{
     padding: 1rem 1rem;
 }
 .ticket .details{
     width:22rem;
     float:left;
+    margin-left: -0.3rem;
     margin-top: 2rem;
 }
 .ticket img{

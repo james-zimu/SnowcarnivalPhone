@@ -1,29 +1,26 @@
 <template>
   <div class="carrental-navbar">
     <!-- 头部区域 -->
-     <header>租车</header>
+     <mt-header class="header" title="嘉年华租车">
+        <router-link to="/shopcar" slot="left">
+          <mt-button icon="back">返回</mt-button>
+        </router-link>
+      </mt-header>
     <!-- navbar -->
-    <div class="nav-bg">
-    <mt-navbar class="nav" v-model="selected" v-for="(item,index) in option" :key="index" >
-      <mt-tab-item class="nav-item" :id="index">{{item}}</mt-tab-item>
-      <!-- <mt-tab-item :id="index">option B</mt-tab-item>
-      <mt-tab-item :id="index">option C</mt-tab-item> -->
-    </mt-navbar>
-    </div>
 <!-- tab-container -->
     <div class="item">
-    <mt-tab-container v-model="selected">
-      <mt-tab-container-item :id="index"  v-for="(items,index) in caritem" :key="index" >
+    <div>
+      <div :id="index"  v-for="(items,index) in caritem" :key="index" >
         <div class="car-bg">
           <div  :id="index" class="car" v-for="(carimg,index) in items.carimgall" :key="index">
+            <input id="input" type="checkbox"  class="check_box tui-checkbox" :value="index" @click="choice($event)">
             <img class="carimg" :src="carimg">
             <span class="pricetext">价格:</span><span class="price">¥{{carprice1[index]}}.00</span>
             <!-- 复选框 -->
-            <input id="input" type="checkbox"  class="check_box tui-checkbox" :value="index" @click="choice($event)">
           </div>
         </div>
-      </mt-tab-container-item>
-    </mt-tab-container>
+      </div>
+    </div>
     </div>
     <!-- footer区域 -->
     <footer>
@@ -53,24 +50,21 @@ export default {
         "SUV",
         "豪华型"
       ],
-      
       caritem:[ 
-          {carimgall:[require("../../public/car/cheap/001.png"),require("../../public/car/cheap/002.png"),require("../../public/car/cheap/003.png"),require("../../public/car/cheap/005.png"),require("../../public/car/cheap/006.png"),require("../../public/car/cheap/007.png")]},
-          {carimgall:[require("../../public/car/business/009.png"),require("../../public/car/business/010.png"),require("../../public/car/business/011.png"),require("../../public/car/business/012.png"),require("../../public/car/business/013.png")]},
-          {carimgall:[require("../../public/car/businessbig/008.png")]},
-          {carimgall:[require("../../public/car/suv/019.png"),require("../../public/car/suv/020.png"),require("../../public/car/suv/021.png"),require("../../public/car/suv/022.png"),require("../../public/car/suv/023.png"),require("../../public/car/suv/024.png")]},
-          {carimgall:[require("../../public/car/luxury/014.png"),require("../../public/car/luxury/015.png"),require("../../public/car/luxury/016.png"),require("../../public/car/luxury/017.png"),require("../../public/car/luxury/018.png")]},
+          {carimgall:[require("../../public/car/cheap/001.png"),require("../../public/car/cheap/002.png"),require("../../public/car/cheap/003.png"),require("../../public/car/cheap/005.png"),require("../../public/car/cheap/006.png"),require("../../public/car/cheap/007.png"),require("../../public/car/business/009.png"),require("../../public/car/business/010.png"),require("../../public/car/business/011.png"),require("../../public/car/business/012.png"),require("../../public/car/business/013.png"),require("../../public/car/businessbig/008.png"),require("../../public/car/suv/019.png"),require("../../public/car/suv/020.png"),require("../../public/car/suv/021.png"),require("../../public/car/suv/022.png"),require("../../public/car/suv/023.png"),require("../../public/car/suv/024.png"),require("../../public/car/luxury/014.png"),require("../../public/car/luxury/015.png"),require("../../public/car/luxury/016.png"),require("../../public/car/luxury/017.png"),require("../../public/car/luxury/018.png")]}
        ],
       carlist:[]
     }
   },
   methods:{
+    
     choice(e){
         let index = e.target.value
         // let car1=this.cars1[index];
         let car =this. carprice1[index];
         this.shop.push(car)
         // console.log(this.shop);
+        //如果选择的是选项二则
         
     },
     remove(){
@@ -88,13 +82,13 @@ export default {
       let object={
         shop:shop
       };
-      console.log(object);
+      // console.log(object);
       // let object={
       //   shop:1
       // }
       // this.axios.post("/carrentalshop",this.qs.stringify(object)).then((res)=>{
       this.axios.post("/carrentalshop",this.qs.stringify(object,{arrayFormat:'repeat'})).then((res)=>{
-        console.log(this.qs.stringify(object));
+        console.log(this.qs.stringify(object,{arrayFormat:'repeat'}));
 
         if(res.data.code==200){
             this.$messagebox.alert("成功加入购物车");
@@ -126,48 +120,42 @@ export default {
 </script>
 
 <style>
-  .carrental-navbar .nav{
-    width: 5rem;
-    background: 0;
-  }
-  .carrental-navbar .nav-bg{
-      position: absolute;
-      background: rgb(244,244, 244);
-      width: 5rem;
-      height: 100%;
-  }
+ 
    .mint-tab-item-label{
      font-size: 1.1rem !important;
    }
   .carrental-navbar header{
-     height: 4rem;
+    height: 3rem;
     width: 100%;
     text-align: center;
     line-height: 4rem;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     background: #468ce6;
   }
    .carrental-navbar .item{
-     position: absolute;
+     position: relative;
      /* background: red; */
      right: 0rem;
-     width: 18.45rem;
+     width: 100%;
    }
   .carrental-navbar .car-bg{
+    margin-bottom: 6rem;
       /* background: red; */
-      width: 18.45rem;
+      width: 100%;
     }
   .carrental-navbar .carimg{
-    position: absolute;
-    width: 7rem;
+    /* position: absolute; */
+    margin-top: -1rem;
+    width: 6.8rem;
+    left: 0.5rem;
   }
   .carrental-navbar .car{
       display: inline-block;
-      margin-top: 0.7rem;
-      margin-left: 0.7rem;
-      width: 8rem;
-      height: 8rem;
+      margin-top: 0.3rem;
+      margin-left: 0.3rem;
+      width: 7rem;
+      height: 7rem;
       border: 0.1rem solid #ddd;
     }
   .carrental-navbar footer{
@@ -175,7 +163,7 @@ export default {
     height: 4rem;
     position: fixed;
     display: flex;
-    padding-top: 1rem;
+    padding-top: -1rem;
     bottom: 0rem;
     background: #fff;
   }
@@ -190,9 +178,9 @@ export default {
     right: 1rem;
   }
  .carrental-navbar .check_box{
-   position: absolute;
+   position: relative;
    top: 0.3rem;
-   right: -0.5rem;
+   left: 5.5rem;
  }
  .carrental-navbar .tui-checkbox:checked {
   background: #468ce6;
@@ -219,13 +207,13 @@ export default {
 }
  .carrental-navbar .pricetext{
     position: relative;
-    top: 6.3rem;
-    left: 1.2rem;
+    top: -1.5rem;
+    left: 0.8rem;
  }
  .carrental-navbar .price{
     position: relative;
-    top: 6.3rem;
-    left: 1.3rem;
+    top: -1.5rem;
+    left: 0.9rem;
     color: #468ce6;
  }
  .carrental-navbar .tui-checkbox:checked::after {

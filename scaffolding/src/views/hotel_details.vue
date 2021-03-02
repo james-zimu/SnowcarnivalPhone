@@ -1,14 +1,18 @@
 <template>
     <div class="hotel_details">
-        <mt-header title="酒店详情"></mt-header>
+        <mt-header class="header" title="嘉年华酒店">
+            <router-link to="/shopcar" slot="left">
+            <mt-button icon="back">返回</mt-button>
+            </router-link>
+        </mt-header>
         <div class="container">
             <div  class="details" v-for="(item,index) in push" :key="index">
                 <div>
-                    <a href="#"><img src="../../public/gray.png" alt="" v-model="hotel_pic"></a>
+                    <a href="#"><img src="../../public/gray.png" alt="" ></a>
                 </div>
                 <div class="title">
                     <div class="title mlf7" >
-                        <a href="#" class="black" v-model="hotel_name">{{item.title}}</a>
+                        <a href="#" class="black">{{item.title}}</a>
                     </div>
                     <div class="comment mlf7">
                         <a class="orange ">{{item.comment}}</a>
@@ -21,7 +25,7 @@
                         <a href="#" class="tips">{{item.product_details}}</a>
                     </p>
                     <span class="blue small mlf-half">￥</span>
-                    <span class="blue price" v-model="hotel_price" >{{item.price}}</span>
+                    <span class="blue price"  >{{item.price}}</span>
                     <input type="button" :value="index" @click="handle($event)" class="forhandle">
                     <button class="order" >加入购物车</button>
                 </div>
@@ -30,18 +34,21 @@
     </div>
 </template>
 <style>
+/* ////////////头部////////////// */
+.hotel_details .header{
+    height: 3rem;
+    width: 100%;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #468ce6;
+  }
 .hotel_details .container{
     margin-top: 1rem;
+    margin-left: 1.5rem;
 }
-.hotel_details .file {
-    width: 150px;
-    height: 50px;
-    position: absolute;
-    top: 50px;
-    left: 30%;
-    z-index: 1;
-    opacity: 0;
-}
+
 .hotel_details .btn {
     width: 150px;
     height: 50px;
@@ -71,7 +78,7 @@
 }
 .hotel_details img{
     width: 7rem;
-    height: 8rem;
+    height: 7rem;
     border-radius: 1rem;
     float:left;
 }
@@ -153,17 +160,7 @@ export default {
             hotel_pic:"",
             hotel_name:"",
             count:"",
-            // list:[{
-            //     title:'郑州丽晶酒店双人下午茶',
-            //     comment:'4.6',
-            //     number:'1309',
-            //     product_details:'老上海风情主题双人下午茶',
-            //     price:'258',
-            //     full:'售空',
-            //     url:a1,
-            //     family_id:'购物车-酒店信息'
-            // },
-            // ],
+            
             push:""
         }
     },

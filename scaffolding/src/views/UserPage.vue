@@ -5,14 +5,14 @@
             <div class="user">
                 <div class="quit">
                     <div class="quit-inner clearfix">
-                        <a href="javascript:;"><span class="iconfont">&#xe630;</span></a>
+                        <a href="javascript:;"><span class="iconfont">&#xe501;</span></a>
                         <a href="javascript:;" class="fr">退出登录</a>
                     </div>
                 </div>
                 <div class="username">
                     <div class="username-inner">
                         <p><a href="javascript:;"><img src="../../src/asstes/image/img1.jpg" alt=""></a></p>
-                        <a href="javascript:;">尊敬的携程用户</a>
+                        <a href="javascript:;">尊敬的嘉年华用户</a>
                     </div>
                 </div>
             </div>

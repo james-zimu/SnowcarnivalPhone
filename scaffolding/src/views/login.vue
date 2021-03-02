@@ -2,9 +2,11 @@
     <div>
         <div class="login">
             <!-- 顶部导航 -->
-            <div id="header">
-                <router-link to="/register" style="color:white">< 注册</router-link>
-            </div>
+             <mt-header class="header" title="嘉年华会员登录">
+                <router-link to="/shopcar" slot="left">
+                <mt-button class="zhuce" icon="back">注册</mt-button>
+                </router-link>
+            </mt-header>
             <!-- 内容区域 -->
             <div class="container">
                 <div class="user-password">用户名密码登录</div>
@@ -136,13 +138,18 @@ export default {
 }
 </script>
 <style scoped>
-    .login #header{
-        background-color:#458ce6;
-        height:2.5rem;
-        font-size:0.9375rem;
-        line-height:2.5rem;
-        padding-left: 1.25rem;
-    }
+    .login  .header{
+    height: 3rem;
+    width: 100%;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #468ce6;
+  }
+  .login  .header>.zhuce{
+      color: #fff;
+  }
     .login .container{
         padding: 1.25rem;
     }

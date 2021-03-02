@@ -59,7 +59,6 @@ Vue.component('foot', foot)
 //     ak: 'nGLvlES6KlFt0NRzn2IKjTYp9aLhinuI'
 // })
 new Vue({
-    el: '#app',
     router,
     store,
     render: h => h(App)

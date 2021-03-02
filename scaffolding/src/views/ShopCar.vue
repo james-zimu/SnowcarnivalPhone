@@ -1,7 +1,11 @@
 <template>
   <div class="ShopCar">
     <!-- 标题头部区域 -->
-    <header>购物车</header>
+     <mt-header class="header" title="嘉年华购物车">
+          <router-link to="/shopcar" slot="left">
+          <mt-button class="zhuce" icon="back">返回</mt-button>
+          </router-link>
+      </mt-header>
     <!-- 中间内容区域 -->
     <div class="container">
       <!-- 如果购物车为空则显示提示 -->
@@ -153,15 +157,15 @@ export default {
 };
 </script>
 <style>
-.ShopCar header {
-  height: 4rem;
-  width: 100%;
-  text-align: center;
-  line-height: 4rem;
-  color: #fff;
-  font-size: 1.5rem;
-  background: #468ce6;
-}
+.ShopCar .header{
+    height: 3rem;
+    width: 100%;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #468ce6;
+  }
 .ShopCar .mint {
   width: 25rem;
 }

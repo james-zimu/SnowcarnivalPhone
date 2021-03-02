@@ -12,7 +12,7 @@ const cors = require('cors');
 
 // 创建MySQL连接池
 const pool = mysql.createPool({
-    host: '172.88.17.37', //MySQL服务器地址
+    host: '172.88.17.5', //MySQL服务器地址
     port: 3306, //MySQL服务器端口号
     user: 'root', //数据库用户的用户名
     password: '12345678', //数据库用户密码
@@ -24,6 +24,7 @@ const pool = mysql.createPool({
 
 // 创建服务器对象
 const server = express();
+
 
 server.use(bodyParser.urlencoded({
     extended: false
@@ -141,42 +142,52 @@ server.get('/carrental', (req, res) => {
 server.post('/carrentalshop', (req, res) => {
     //获取租车页面接口传过来的数据
     let price = req.body.shop;
-    let arr = price.join(',')
+    // console.log(price);
+    if (price.length > 1) {
+        let arr = price.join(',')
+            // let sql = 'SELECT rmodle,price,classification FROM sc_carrental1 ORDER BY rid';
+        let sql = 'select * from sc_carrental1 where price in (' + arr + ')'
+        console.log(sql);
+        // // 执行SQL语句
+        pool.query(sql, (error, results) => {
+            if (error) throw error;
+            res.send({ message: 'ok', code: 200, results: results });
+            let carlist = [];
+            //循环results中的内容
+            for (let i = 0; i < results.length; i++) {
+                let obj = results[i];
+                //获取对象中的img值和购物车数据库中对接
+                let details_img = obj.img;
+                //获取对象中的rmodle值和购物车数据库中对接
+                let details_top = obj.rmodle;
+                //获取对象中的classification值和购物车数据库中对接
+                let time = obj.classification;
+                //获取对象中的price值和购物车数据库中对接
+                let price = obj.price;
+                //获取对象中的num值和购物车中数据对接
+                let num = obj.num;
+                //获取对象中的logo_name值和购物车中数据对接
+                let logo_name = obj.logo_name;
+                //使用sql语句将获取的值插入购入车数据库
+                let sql1 = 'insert into sc_car (details_img, details_top, time, price ,num,logo_name) value (?,?,?,?,?,?)'
+                pool.query(sql1, [details_img, details_top, time, price, num, logo_name], (error, results) => {
+                    // if (error) throw error;
+                    console.log(error);
+                    // if (error) throw error;
+                    // res.send({ message: 'ok', code: 200 });
+                });
+            }
+        });
+    } else { //???????????????????????????????
+        let sql = 'select * from sc_carrental1 where price in (' + arr + ')'
+        pool.query(sql, (error, results) => {
+            if (error) throw error;
+            res.send({ message: 'ok', code: 200, results: results });
+        });
+    }
     console.log(price);
     // SQL语句以获取分类表的数据
-    // let sql = 'SELECT rmodle,price,classification FROM sc_carrental1 ORDER BY rid';
-    let sql = 'select * from sc_carrental1 where price in (' + arr + ')'
-    console.log(sql);
-    // // 执行SQL语句
-    pool.query(sql, (error, results) => {
-        if (error) throw error;
-        res.send({ message: 'ok', code: 200, results: results });
-        let carlist = [];
-        //循环results中的内容
-        for (let i = 0; i < results.length; i++) {
-            let obj = results[i];
-            //获取对象中的img值和购物车数据库中对接
-            let details_img = obj.img;
-            //获取对象中的rmodle值和购物车数据库中对接
-            let details_top = obj.rmodle;
-            //获取对象中的classification值和购物车数据库中对接
-            let time = obj.classification;
-            //获取对象中的price值和购物车数据库中对接
-            let price = obj.price;
-            //获取对象中的num值和购物车中数据对接
-            let num = obj.num;
-            //获取对象中的logo_name值和购物车中数据对接
-            let logo_name = obj.logo_name;
-            //使用sql语句将获取的值插入购入车数据库
-            let sql1 = 'insert into sc_car (details_img, details_top, time, price ,num,logo_name) value (?,?,?,?,?,?)'
-            pool.query(sql1, [details_img, details_top, time, price, num, logo_name], (error, results) => {
-                // if (error) throw error;
-                console.log(error);
-                // if (error) throw error;
-                // res.send({ message: 'ok', code: 200 });
-            });
-        }
-    });
+
 });
 
 
