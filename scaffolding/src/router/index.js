@@ -40,7 +40,7 @@ const routes = [{
         component: remark
     },
     {
-        path: '/home_page',
+        path: '/',
         component: HomePage
     },
     {
@@ -71,8 +71,6 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
     routes
 })
 

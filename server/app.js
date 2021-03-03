@@ -12,9 +12,11 @@ const cors = require('cors');
 
 // 创建MySQL连接池
 const pool = mysql.createPool({
+    // host: 'localhost', //MySQL服务器地址
     host: '172.88.17.5', //MySQL服务器地址
     port: 3306, //MySQL服务器端口号
     user: 'root', //数据库用户的用户名
+    // password: 'jingrui01314!!', //数据库用户密码
     password: '12345678', //数据库用户密码
     database: 'SnowcarnivalPhone', //数据库名称
     connectionLimit: 20, //最大连接数
@@ -25,7 +27,6 @@ const pool = mysql.createPool({
 // 创建服务器对象
 const server = express();
 
-
 server.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -35,6 +36,7 @@ server.use(bodyParser.urlencoded({
 // 使用CORS中间件
 server.use(cors({
     origin: ['http://localhost:8080', 'http://127.0.0.1:8080']
+        // origin: ['http://0.0.0.0:8080', 'http://127.0.0.1:8080']
 }));
 
 server.post('/addcar', (req, res) => {
@@ -43,16 +45,7 @@ server.post('/addcar', (req, res) => {
     // let details=req.body.hotel_pic;
     let price = req.body.price;
     let family_id = req.body.family_id;
-    // let comment=req.body.comment;
-    // let number=req.body.number;
-    // let top=req.body.top;
-    // let address=req.body.address;
-    // let city=req.body.city;
-    // let tips1=req.body.tips1;
-    // let tips2=req.body.tips2;
-    // let tips3=req.body.tips3;
-    // let itemDetails=req.body.itemDetails;
-    // let play=req.body.play;
+
     let product_details = req.body.product_details
     console.log(family_id, title, price, product_details);
     let sql = 'INSERT INTO sc_car SET family_id=?,title=?,price=?,product_details=?'
@@ -129,7 +122,7 @@ server.post('/login', (req, res) => {
 //获取租车数据库中数据并发送到web服务器
 server.get('/carrental', (req, res) => {
     // SQL语句以获取分类表的数据
-    let sql1 = 'SELECT rid,img,price,classification FROM sc_carrental1 ORDER BY rid';
+    let sql1 = 'SELECT rid,details_img,price,classification FROM sc_carrental1 ORDER BY rid';
     // 执行SQL语句
     pool.query(sql1, (error, results) => {
         if (error) throw error;
@@ -142,7 +135,7 @@ server.get('/carrental', (req, res) => {
 server.post('/carrentalshop', (req, res) => {
     //获取租车页面接口传过来的数据
     let price = req.body.shop;
-    // console.log(price);
+    console.log(price);
     if (price.length > 1) {
         let arr = price.join(',')
             // let sql = 'SELECT rmodle,price,classification FROM sc_carrental1 ORDER BY rid';
@@ -157,7 +150,7 @@ server.post('/carrentalshop', (req, res) => {
             for (let i = 0; i < results.length; i++) {
                 let obj = results[i];
                 //获取对象中的img值和购物车数据库中对接
-                let details_img = obj.img;
+                let details_img = obj.details_img;
                 //获取对象中的rmodle值和购物车数据库中对接
                 let details_top = obj.rmodle;
                 //获取对象中的classification值和购物车数据库中对接
@@ -185,7 +178,7 @@ server.post('/carrentalshop', (req, res) => {
             res.send({ message: 'ok', code: 200, results: results });
         });
     }
-    console.log(price);
+    // console.log(price);
     // SQL语句以获取分类表的数据
 
 });
@@ -200,6 +193,7 @@ server.get('/getcar', (req, res) => {
     pool.query(sql, (err, result) => {
         if (err) throw err;
         res.send({ message: 'ok', code: 200, result: result });
+        console.log(result);
     });
 });
 //后台重新计算商品的总价，确保数据的可靠性

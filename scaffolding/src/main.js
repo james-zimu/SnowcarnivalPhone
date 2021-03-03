@@ -4,8 +4,9 @@ import router from './router'
 import store from './store'
 //引人入axios
 import axios from 'axios'
+// axios.defaults.baseURL = 'http://8.142.43.150/app'
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 Vue.prototype.axios = axios;
 //引入mintui轮播图组件
 import { Swipe, SwipeItem } from 'mint-ui';
@@ -58,6 +59,8 @@ Vue.component('foot', foot)
 //     /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */
 //     ak: 'nGLvlES6KlFt0NRzn2IKjTYp9aLhinuI'
 // })
+
+
 new Vue({
     router,
     store,

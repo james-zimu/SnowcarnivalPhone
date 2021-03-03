@@ -28,11 +28,12 @@
             <!-- logo区域 -->
             <div class="logo">
               <img :src="require('../../public/snow.png')" />
-              <span>{{ item.logo_name }}</span>
+              <span class="logotitle">{{ item.logo_name }}</span>
             </div>
             <!-- 详细内容区域 -->
             <div class="details">
-              <img :src="require('../../public/snow.png')" />
+              <img :src="require('../../public/shopcar/'+item.details_img)" />
+              <!-- <img :src="require('../../public/snow.png')" /> -->
               <div class="details-list">
                 <span class="details_top">{{ item.details_top }}</span>
                 <div class="list-more">
@@ -141,6 +142,7 @@ export default {
     this.axios.get(`/getcar`).then((result) => {
       //将服务器返回的数据赋值给shopcar变量
       this.ShopCar = result.data.result;
+      console.log(this.ShopCar);
       //调用计算总价方法计算价格
       this.Totalprice();
     });
@@ -285,5 +287,8 @@ export default {
 }
 .ShopCar .container{
   margin-bottom: 3rem;
+}
+.ShopCar .logotitle{
+  font-size: 1.2rem !important;
 }
 </style>

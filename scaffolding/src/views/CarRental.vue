@@ -51,7 +51,7 @@ export default {
         "豪华型"
       ],
       caritem:[ 
-          {carimgall:[require("../../public/car/cheap/001.png"),require("../../public/car/cheap/002.png"),require("../../public/car/cheap/003.png"),require("../../public/car/cheap/005.png"),require("../../public/car/cheap/006.png"),require("../../public/car/cheap/007.png"),require("../../public/car/business/009.png"),require("../../public/car/business/010.png"),require("../../public/car/business/011.png"),require("../../public/car/business/012.png"),require("../../public/car/business/013.png"),require("../../public/car/businessbig/008.png"),require("../../public/car/suv/019.png"),require("../../public/car/suv/020.png"),require("../../public/car/suv/021.png"),require("../../public/car/suv/022.png"),require("../../public/car/suv/023.png"),require("../../public/car/suv/024.png"),require("../../public/car/luxury/014.png"),require("../../public/car/luxury/015.png"),require("../../public/car/luxury/016.png"),require("../../public/car/luxury/017.png"),require("../../public/car/luxury/018.png")]}
+          {carimgall:[require("../../public/shopcar/car001.png"),require("../../public/shopcar/car002.png"),require("../../public/shopcar/car003.png"),require("../../public/shopcar/car004.png"),require("../../public/shopcar/car005.png"),require("../../public/shopcar/car006.png"),require("../../public/shopcar/car008.png"),require("../../public/shopcar/car009.png"),require("../../public/shopcar/car010.png"),require("../../public/shopcar/car011.png"),require("../../public/shopcar/car012.png"),require("../../public/shopcar/car007.png"),require("../../public/shopcar/car018.png"),require("../../public/shopcar/car019.png"),require("../../public/shopcar/car020.png"),require("../../public/shopcar/car021.png"),require("../../public/shopcar/car022.png"),require("../../public/shopcar/car023.png"),require("../../public/shopcar/car013.png"),require("../../public/shopcar/car014.png"),require("../../public/shopcar/car015.png"),require("../../public/shopcar/car016.png"),require("../../public/shopcar/car017.png")]}
        ],
       carlist:[]
     }
@@ -87,6 +87,7 @@ export default {
       //   shop:1
       // }
       // this.axios.post("/carrentalshop",this.qs.stringify(object)).then((res)=>{
+        // 将获取到的价钱信息传到后台
       this.axios.post("/carrentalshop",this.qs.stringify(object,{arrayFormat:'repeat'})).then((res)=>{
         console.log(this.qs.stringify(object,{arrayFormat:'repeat'}));
 
@@ -98,7 +99,7 @@ export default {
   },
   mounted(){
       //获取url中的动态参数
-      //将此id发送到web服务器,以获取当前文章的详细信息
+      //将此id发送到web服务器,以获取当前车辆的详细信息
       this.axios.get('/carrental',).then(res=>{
         //从数据库中拿到的数据保存到一个变量中
         let carall = res.data.results;
@@ -112,8 +113,6 @@ export default {
             this.carprice1.push(carprice);
             
         }
-        //分离数据数据表第一项的第一个对象
-        
       })
     }
 }
