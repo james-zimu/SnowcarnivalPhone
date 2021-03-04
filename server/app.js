@@ -12,7 +12,7 @@ const cors = require('cors');
 
 // 创建MySQL连接池
 const pool = mysql.createPool({
-    host: '172.88.17.5', //MySQL服务器地址'172.88.17.37'
+    host: '172.88.17.5', //MySQL服务器地址
     port: 3306, //MySQL服务器端口号
     user: 'root', //数据库用户的用户名
     password: '12345678', //数据库用户密码
@@ -112,7 +112,7 @@ server.post('/login', (req, res) => {
     let uname = req.body.username;
     let upwd = req.body.password;
     //SQL语句
-    let sql = 'SELECT uid,uname,phone FROM sc_user WHERE uname=? AND upwd=MD5(?)';
+    let sql = 'SELECT uid,uname,phone,photo FROM sc_user WHERE uname=? AND upwd=MD5(?)';
     // console.log(sql);
     pool.query(sql, [uname, upwd], (error, results) => {
 
@@ -290,17 +290,17 @@ server.post('/schedule', (req, res) => {
 
 
 //首页底部的广告及内容
-server.get("/fcategory", (req, res) => {
-    let sql = 'SELECT lid,images,title,content FROM sc_home_page ORDER BY lid';
-    pool.query(sql, (error, results) => {
-        if (error) throw error;
-        res.send({
-            message: 'ok',
-            code: 200,
-            results: results
-        })
-    })
-})
+// server.get("/fcategory", (req, res) => {
+//     let sql = 'SELECT lid,images,title,content FROM sc_home_page ORDER BY lid';
+//     pool.query(sql, (error, results) => {
+//         if (error) throw error;
+//         res.send({
+//             message: 'ok',
+//             code: 200,
+//             results: results
+//         })
+//     })
+// })
 
 
 
@@ -310,7 +310,7 @@ server.post('/remark', (req, res) => {
     let remcontent = req.body.msg;
     let photo = req.body.photo;
     let number = req.body.number;
-    let sql = 'INSERT INTO test4(number,uname,photo,remcontent) VALUES(?,?,?,?)';
+    let sql = 'INSERT INTO sc_remark(number,uname,photo,remcontent) VALUES(?,?,?,?)';
     pool.query(sql, [number, uname, photo, remcontent], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result });
@@ -321,30 +321,23 @@ server.post('/remark', (req, res) => {
 server.get('/article', (req, res) => {
     // console.log(req.query.id)
     let number = req.query.id;
-    let sql = 'SELECT uname,photo,image,content FROM test3 WHERE NUMBER=?';
+    let sql = 'SELECT * FROM sc_share WHERE NUMBER=?';
     pool.query(sql, [number], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result })
     })
-
 })
 
 //向数据库请求当前网页的留言与评论内容
 server.get('/beforrem', (req, res) => {
     // console.log(req.query.number)
     let number = req.query.number;
-    let sql = 'SELECT uname,photo,remcontent FROM test4 WHERE NUMBER=?';
+    let sql = 'SELECT uname,photo,remcontent FROM sc_remark WHERE NUMBER=?';
     pool.query(sql, [number], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result })
     })
 })
-
-// 指定服务器对象监听的端口号
-server.listen(3000, () => {
-    console.log('server is running...');
-});
-
 server.get('/everyone', (req, res) => {
     //mysql语句
     let sql = 'SELECT * FROM sc_everyone ORDER BY uid';
@@ -356,6 +349,17 @@ server.get('/everyone', (req, res) => {
     })
 });
 
+server.post('/like',(req,res)=>{
+    let number = Number(req.body.number);
+    let love =Number(req.body.love) ;
+    let sql = 'update sc_share set love=? where number=?';
+    // console.log(number,love)
+    pool.query(sql,[love,number],(error,result)=>{
+        if(error) throw error;
+        res.send({message:'ok',code:200,result:result})
+    })
+})
+
 server.get('/community', (req, res) => {
     //mysql语句
     let sql = 'SELECT * FROM sc_community ORDER BY cid';
@@ -363,6 +367,12 @@ server.get('/community', (req, res) => {
     pool.query(sql, (error, results) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, results: results });
-        console.log(results);
+        // console.log(results);
     })
 });
+
+// 指定服务器对象监听的端口号
+server.listen(3000, () => {
+    console.log('server is running...');
+});
+
