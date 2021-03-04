@@ -12,7 +12,7 @@
         <!-- 顶部容器 -->
         <div class="top">
           <!-- 顶部标题 -->
-          <span class="top-title">{{ title }}</span>
+          <span class="top-title">{{ title1 }}</span>
           <!-- 顶部内容容器 -->
           <div class="imgs-box">
             <!-- 顶部左边区域容器 -->
@@ -20,13 +20,13 @@
               <a class="left-img-box" href="http://www.baidu.com">
                 <p>{{ Hotel[0].title }}</p>
                 <div class="left-img">
-                  <img src="https://urlify.cn/NFZJn2" />
+                  <img :src="imgurl[0].imgurl" />
                 </div>
               </a>
               <a class="right-img-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[1].title }}</p>
                 <div class="right-img">
-                  <img src="https://urlify.cn/Bv67vu" alt="" />
+                  <img :src="imgurl[1].imgurl" />
                 </div>
               </a>
             </div>
@@ -34,19 +34,19 @@
               <a class="bottom-left-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[2].title }}</p>
                 <div class="bottom-left">
-                  <img src="https://urlify.cn/ArIz2y" alt="" />
+                  <img :src="imgurl[2].imgurl" />
                 </div>
               </a>
               <a class="bottom-center-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[3].title }}</p>
                 <div class="bottom-center">
-                  <img src="https://urlify.cn/Q7Frau" alt="" />
+                  <img :src="imgurl[3].imgurl" />
                 </div>
               </a>
               <a class="bottom-right-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[4].title }}</p>
                 <div class="bottom-right">
-                  <img src="https://urlify.cn/Y3aUZb" alt="" />
+                  <img :src="imgurl[4].imgurl" />
                 </div>
               </a>
             </div>
@@ -54,16 +54,16 @@
         </div>
         <!-- 底部容器 -->
         <div class="bottom">
-          <div class="bottom-title">{{ title }}</div>
+          <div class="bottom-title">{{ title2 }}</div>
           <div class="bottom-box">
             <a class="bottomer-left" href="http://www.baidu.com">
-              <img src="https://urlify.cn/nQveym" alt="" />
+              <img :src="imgurl[5].imgurl" />
             </a>
             <a class="bottomer-center" href="http://www.baidu.com">
-              <img src="https://urlify.cn/MNjM3q" alt="" />
+              <img :src="imgurl[6].imgurl" />
             </a>
             <a class="bottomer-right" href="http://www.baidu.com">
-              <img src="https://urlify.cn/im2em2" alt="" />
+              <img :src="imgurl[7].imgurl" />
             </a>
           </div>
         </div>
@@ -76,13 +76,24 @@
 export default {
   data() {
     return {
-      title: "嘉年华精选榜",
+      title1: "嘉年华精选榜",
+      title2: "嘉年华特色榜",
       Hotel: [
         { title: "门店新客" },
         { title: "商户大促" },
         { title: "出游推荐" },
         { title: "早订优惠" },
         { title: "优享酒店" },
+      ],
+      imgurl: [
+        { imgurl: require("../../public/hotel/xinke.jpg") },
+        { imgurl: require("../../public/hotel/jingxuan.jpg") },
+        { imgurl: require("../../public/hotel/kuanghuan.jpg") },
+        { imgurl: require("../../public/hotel/zaoniao.jpg") },
+        { imgurl: require("../../public/hotel/zunxiang.jpg") },
+        { imgurl: require("../../public/hotel/wenquan.jpg") },
+        { imgurl: require("../../public/hotel/gaoshan.jpg") },
+        { imgurl: require("../../public/hotel/jiguang.jpg") },
       ],
     };
   },
