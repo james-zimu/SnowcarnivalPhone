@@ -2,7 +2,7 @@
   <div class="ShopCar">
     <!-- 标题头部区域 -->
      <mt-header class="header" title="嘉年华购物车">
-          <router-link to="/shopcar" slot="left">
+          <router-link to="/" slot="left">
           <mt-button class="zhuce" icon="back">返回</mt-button>
           </router-link>
       </mt-header>

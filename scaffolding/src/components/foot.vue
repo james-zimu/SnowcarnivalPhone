@@ -1,29 +1,25 @@
 <template>
     <div class="footer">
-      <div class="bottom-bar">
-        <mt-tabbar v-model="selected">
-          <mt-tab-item id="one">
-          <p class="iconfont">&#xe695;</p>
-          <h4>首页</h4>
-          </mt-tab-item>
-          <mt-tab-item id="two">
-                <p class="iconfont">&#xe731;</p>
-            <h4><a href="/community">社区</a> </h4>
-          </mt-tab-item>
-          <mt-tab-item id="three">
-            <p class="iconfont">&#xe508;</p>
-            <h4> <a href="/#/shopcar">购物车</a></h4>
-          </mt-tab-item>
-          <mt-tab-item id="four">
-            <p class="iconfont">&#xe63e;</p>
-            <h4><a href="trip">行程</a> </h4>
-          </mt-tab-item>
-          <mt-tab-item id="five">
-            <p class="iconfont">&#xe502;</p>
-            <h4><a href="#/userpage">我的</a></h4>
-          </mt-tab-item>
-        </mt-tabbar>
-      </div>
+      <a href="#/" class="footer-inner h-page">
+        <span class="iconfont">&#xe695;</span><br>
+        <p>首页</p>
+      </a>
+      <a href="#/community" class="footer-inner h-comm">
+        <span class="iconfont">&#xe731;</span><br>
+        <p>社区</p>
+      </a>
+      <a href="#/shopcar" class="footer-inner">
+        <span class="iconfont">&#xe50c;</span><br>
+        <p>购物车</p>
+      </a>
+      <a href="#/trip" class="footer-inner h-trip">
+        <span class="iconfont">&#xe63e;</span><br>
+        <p>行程</p>
+      </a>
+      <a href="javascript:;" class="footer-inner h-user" @click="push">
+        <span class="iconfont">&#xe502;</span><br>
+        <p>我的</p>
+      </a>
     </div>
 </template>
 <style>
@@ -60,7 +56,10 @@ export default {
     }
   },
   methods:{
-   
+    push(){
+      this.$router.push('/userpage');
+      location.reload()
+    }
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <div class="Hotel">
     <!-- 导航头区域 -->
     <mt-header class="header" title="嘉年华酒店推荐">
-      <router-link to="/shopcar" slot="left">
+      <router-link to="/#/Home_page" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -136,7 +136,7 @@ export default {
   height: 14.8rem;
   margin-top: 1rem;
   background-color: #9ac7f7;
-  border-radius: 5%;
+  border-radius: 0.6rem;
 }
 .Hotel .top-flex {
   display: flex;
@@ -150,7 +150,7 @@ export default {
   margin: 1rem 1.5%;
   margin-top: 0.6rem;
   margin-left: 0.5rem;
-  border-radius: 5%;
+  border-radius: 0.5rem;
   background-color: #fff;
 }
 .Hotel .left-img {
@@ -177,7 +177,7 @@ export default {
 .bottom-right > img {
   width: 100%;
   height: 100%;
-  border-radius: 5%;
+  border-radius: 0.5rem;
 }
 .Hotel p {
   color: black;
@@ -188,7 +188,7 @@ export default {
   cursor: pointer;
   width: 30.66%;
   height: 6.5rem;
-  border-radius: 5%;
+  border-radius: 0.5rem;
   margin-right: 0.5rem;
   margin-top: 0.6rem;
   background-color: #fff;
@@ -203,7 +203,7 @@ export default {
   cursor: pointer;
   width: 30.66%;
   height: 6.5rem;
-  border-radius: 5%;
+  border-radius: 0.5rem;
   margin-left: 1.5%;
   background-color: #fff;
 }
@@ -212,7 +212,7 @@ export default {
   cursor: pointer;
   width: 30.66%;
   height: 6.5rem;
-  border-radius: 5%;
+  border-radius: 0.5rem;
   background-color: #fff;
 }
 .Hotel .bottom-right-box {
@@ -220,7 +220,7 @@ export default {
   cursor: pointer;
   width: 30.66%;
   height: 6.5rem;
-  border-radius: 5%;
+  border-radius: 0.5rem;
   margin-right: 1.5%;
   background-color: #fff;
 }
@@ -240,7 +240,7 @@ export default {
 .Hotel .bottom-box img {
   width: 100%;
   height: 100%;
-  border-radius: 5%;
+  border-radius: 0.5rem;
 }
 .Hotel .bottomer-left {
   display: block;

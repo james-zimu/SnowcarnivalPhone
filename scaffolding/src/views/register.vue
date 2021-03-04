@@ -2,7 +2,7 @@
     <div class="register">
         <div class="all">
             <div id="header">
-                <router-link to="/login" style="color:white">< 登录</router-link>
+                <router-link to="/login" style="color:white;margin-left:1.8rem"><span class="iconfont">&#xe501;</span>登录</router-link>
             </div>
             <div class="container">
                 <div class="container">
@@ -262,6 +262,11 @@ export default {
         line-height:2.5rem;
         color:white;
         padding-left: 1.25rem;
+    }
+    .register #header span{
+        font-size: 1.5rem;
+        position: absolute;
+        left: 1.5rem;
     }
     .register .container{
         padding-left: 2rem;

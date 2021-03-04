@@ -5,9 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : {},
         //存储用户当前登陆信息
-        uk: "moren"
+        uk: "moren",
+        islogin: sessionStorage.getItem('user') ? 1 : 0,
+        user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : {}, //存储当前登录用户的信息
+        aaa() {
+            sessionStorage.clear();
+        },
     },
     mutations: {
         loginOK(state, payload) {

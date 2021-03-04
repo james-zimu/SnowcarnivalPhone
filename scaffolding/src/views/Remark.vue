@@ -3,7 +3,7 @@
   <div class="remark" v-if="!push == ''">
     <div class="reamark-header">
       <div class="reamark-back">
-        <router-link to="/trip" slot="left">
+        <router-link to="/community" slot="left">
           <mt-button icon="back"></mt-button>
         </router-link>
       </div>

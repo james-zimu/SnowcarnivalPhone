@@ -2,7 +2,7 @@
 <template>
    <div class="trip">
      <!-- 返回头 -->
-      <div class="back"><a href="/home_page"><span class="iconfont">&#xe501;</span>返回</a></div>
+      <div class="back"><a href="/"><span class="iconfont">&#xe501;</span>返回</a></div>
      <!-- 导入日历组件 -->
       <kl-calendar height="25rem" width="23rem" 
       :show-festival="false" 

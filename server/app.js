@@ -257,6 +257,33 @@ server.post('/scheduledelete', (req, res) => {
         res.send({ message: 'ok', code: 200 })
     })
 });
+//根据用户的增加操作更新数据库的数量，确保调用计算总价接口时总价的正确性
+server.post(`/addnum`, (req, res) => {
+    //获取前台传入的该商品的cid
+    let cid = req.body.cid;
+    //获取前台传入的该cid商品的数量
+    let num = req.body.num;
+    num = ++num;
+    console.log(num)
+    var sql = "update sc_car set num=? where cid=?";
+    pool.query(sql, [num, cid], (err, result) => {
+        if (err) throw err;
+        res.send({ message: "ok", code: 200 })
+    })
+})
+server.post(`/lessnum`, (req, res) => {
+    //获取前台传入的该商品的cid
+    let cid = req.body.cid;
+    //获取前台传入的该cid商品的数量
+    let num = req.body.num;
+    num = --num;
+    console.log(num)
+    var sql = "update sc_car set num=? where cid=?";
+    pool.query(sql, [num, cid], (err, result) => {
+        if (err) throw err;
+        res.send({ message: "ok", code: 200 })
+    })
+})
 
 
 
@@ -271,7 +298,6 @@ server.get('/schedule', (req, res) => {
         // console.log(results);
     });
 });
-
 
 
 
@@ -348,14 +374,24 @@ server.post('/schedule', (req, res) => {
 
 server.get('/everyone', (req, res) => {
     //mysql语句
-    let sql = 'SELECT * FROM sc_everyone ORDER BY uid';
+    let sql = 'SELECT * FROM sc_share ORDER BY number';
     //执行SQL
     pool.query(sql, (error, results) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, results: results });
-        console.log(results);
     })
 });
+
+server.post('/like', (req, res) => {
+    let number = Number(req.body.number);
+    let love = Number(req.body.love);
+    let sql = 'update sc_share set love=? where number=?';
+    // console.log(number,love)
+    pool.query(sql, [love, number], (error, result) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, result: result })
+    })
+})
 
 server.get('/community', (req, res) => {
     //mysql语句
@@ -364,13 +400,17 @@ server.get('/community', (req, res) => {
     pool.query(sql, (error, results) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, results: results });
-        console.log(results);
     })
 });
-
-
-
-// 指定服务器对象监听的端口号
+server.get('/discuss', (req, res) => {
+        // console.log(req.query.number)
+        let sql = 'SELECT * FROM sc_remark ORDER BY number';
+        pool.query(sql, (error, result) => {
+            if (error) throw error;
+            res.send({ message: 'ok', code: 200, result: result })
+        })
+    })
+    // 指定服务器对象监听的端口号
 server.listen(3000, () => {
     console.log('server is running...');
 });

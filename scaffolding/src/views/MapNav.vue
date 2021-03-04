@@ -13,7 +13,7 @@
                 <a :class="{'bg':bgcolor5}" href="javascript:;" @click="shopping()">购物</a>
             </div>
         </div>
-        <a href="/home_page" class="back">
+        <a href="#/" class="back">
             <span class="iconfont">&#xe501;</span>
         </a>
     </div>
@@ -21,7 +21,7 @@
 <style>
     .mapnav #container{
         overflow: hidden;
-        width: 25.875rem;
+        width: 23.4375rem;
         height: 46rem;
         margin: 0;
         font-family: "微软雅黑";
@@ -30,46 +30,46 @@
         height: 1px;
     }
     .BMap_stdMpZoom.BMap_noprint.anchorBR{
-        inset: auto 1rem 4.3rem auto !important;
+        inset: auto 1rem 9rem auto !important;
         transition: 0.3s;
     }
     .anchorBL{
         transition: 0.3s;
-        inset: auto auto 4.3rem 0.6rem !important;
+        inset: auto auto 9rem 0.6rem !important;
     }
     .BMap_scaleCtrl{
         transition: 0.3s;
-        inset:  auto auto 4.3rem 4.6rem !important;
+        inset:  auto auto 9rem 4.6rem !important;
     }
     .BMap_noprint.anchorBR {
-        inset: auto 14px 175px auto !important;
+        inset: auto 14px 16rem auto !important;
         transition: 0.3s !important;
     }
     .contai .BMap_noprint.anchorBR{
-        inset: auto 14px 135px auto !important;
+        inset: auto 14px 14rem auto !important;
         transition: 0.3s !important;
     }
     .contai .BMap_stdMpZoom.BMap_noprint.anchorBR{
         transition: 0.3s;
-        inset: auto 1rem 1.75rem auto !important;
+        inset: auto 1rem 7rem auto !important;
     }
     .contai .anchorBL{
         transition: 0.3s;
-        inset: auto auto 1.75rem 0.6rem !important;
+        inset: auto auto 7rem 0.6rem !important;
     }
     .BMap_noprint.BMap_CityListCtrl.anchorTL{
         inset:  1.4rem auto auto 4rem !important;
     }
     .contai .BMap_scaleCtrl{
         transition: 0.3s;
-        inset:  auto auto 1.75rem 4.6rem !important;
+        inset:  auto auto 7rem 4.6rem !important;
     }
     .citylist_popup_main{
         width: 80% !important;
     }
-    .citylist_popup_main .city_content_top{
+    /* .citylist_popup_main .city_content_top{
         display: none;
-    }
+    } */
     .BMap_stdMpZoom .BMap_button_new{
         width: 3rem !important;
         height: 3rem !important;
@@ -83,14 +83,13 @@
         left: 1.1rem !important;
     }
     .mapnav .nav{
-        width: 23.5rem;
+        width: 22.26rem;
         /* height: 3.5rem; */
         background: #fff;
         z-index: 1000;
         position: absolute;
         bottom: 0;
         padding: 0.3rem 0.6rem;
-        left: 0.56rem;
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
         transition: 0.3s;
@@ -104,7 +103,7 @@
     }
     .mapnav .nav .option a{
         display: inline-block;
-        width: 3.4rem;
+        width: 3.2rem;
         height: 1.25rem;
         line-height: 1.25rem;
         padding: 0.5rem;
@@ -179,8 +178,8 @@ export default {
             // 控件基于停靠位置的偏移量（可选）
             offset: new BMapGL.Size(10, 5)
             });
-        // 将控件添加到地图上
-        map.addControl(cityControl);
+            // 将控件添加到地图上
+            map.addControl(cityControl);
             // 将控件添加到地图上1
             map.addControl(locationControl);
             //添加全部检索点击事件

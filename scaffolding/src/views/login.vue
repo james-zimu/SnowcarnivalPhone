@@ -4,7 +4,7 @@
             <!-- 顶部导航 -->
              <mt-header class="header" title="嘉年华会员登录">
                 <router-link to="/shopcar" slot="left">
-                <mt-button class="zhuce" icon="back">注册</mt-button>
+                <mt-button class="zhuce" icon="back">注册(我的)</mt-button>
                 </router-link>
             </mt-header>
             <!-- 内容区域 -->
@@ -45,10 +45,7 @@
                 </div>
                 <!-- 4个图标 -->
                 <div class="reg-way">
-                    <a href="https://weixin.qq.com/"><span class="iconfont">&#xe505;</span></a>
-                    <a href="https://im.qq.com/mobileqq/"><span class="iconfont">&#xe698;</span></a>
-                    <!-- <a href="#"><span class="iconfont">&#xe510;</span></a>
-                    <a href="#"><span class="iconfont">&#xe605;</span></a> -->
+                   
                 </div>
                 <!-- 隐私条款 -->
                 <div class="agree">
@@ -70,6 +67,7 @@ export default {
         password: "",
         usernameState: "",
         passwordState: "",
+        user:{},
         };
     },
     methods:{
@@ -123,9 +121,12 @@ export default {
                 this.$store.commit('loginOK',res.data.result)
                 //把用户信息存入sessionStorage
                 let userString = JSON.stringify(res.data.result)
+                // console.log(userString)
                 window.sessionStorage.setItem('user',userString)
                 //登录成功
-                this.$router.push('/hotel_details');
+                this.$router.push('/userpage');
+                // this.$router.push('/register');
+                this.$store.state.islogin = 1
                 }
                 if(res.data.code == 201){//登陆失败
                 this.$messagebox('提示信息','用户名或密码错误')

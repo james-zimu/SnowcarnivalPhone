@@ -1,7 +1,7 @@
 <template>
     <div class="hotel_details">
         <mt-header class="header" title="嘉年华酒店">
-            <router-link to="/shopcar" slot="left">
+            <router-link to="/#/Home_page" slot="left">
             <mt-button icon="back">返回</mt-button>
             </router-link>
         </mt-header>
