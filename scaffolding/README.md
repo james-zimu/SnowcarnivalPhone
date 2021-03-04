@@ -33,7 +33,7 @@
 * 物理设计
 
   * mysql数据库
-  * 图形化操作软件（mysqlbranch,navicat）
+  * 图形化操作软件（workbench,navicat）
 
 * 维护设计
 
