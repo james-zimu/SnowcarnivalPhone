@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="details" v-for="(item,index) in push" :key="index">
                     <div slot="left">
-                        <a href="#"><img src="../../public/gray.png" alt=""></a>
+                        <a href="#"><img :src="require('../../public/shopcar/'+item.img)" alt=""></a>
                     </div>
                 <div class="details-word">
                     <div class="title"><a href="#" class="black">{{item.title}}</a> </div>
@@ -130,7 +130,7 @@
 }
 </style>
 <script>
-// import a1 from '../../public/eye.png'
+// import a1 from '../../public/gray.png'
 export default {
     data(){
         return{
@@ -150,7 +150,8 @@ export default {
                 //     url: a1,
                 //     family_id:'购物车-门票信息'
                 // },],
-                push:""
+                push:"",
+
         }
     },
         methods:{
@@ -162,13 +163,15 @@ export default {
                 title:this.push[index].title,
                 // hotel_pic:this.list[index].url,
                 price:this.push[index].price,
-                family_id:this.push[index].family_id
+                family_id:this.push[index].family_id,
+                num:'1',
+                img:this.push[index].img
             }
             // console.log(object);
+                console.log(object);
             this.axios.post('/addcar',this.qs.stringify(object)).then(res=>{
-                console.log(res.data.code);
                 if(res.data.code==200){
-                    alert('添加成功')
+                    this.$messagebox.alert("成功加入购物车");
                 }
             })
         }

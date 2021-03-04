@@ -4,7 +4,7 @@
         <div class="container">
             <div  class="details" v-for="(item,index) in push" :key="index">
                 <div>
-                    <a href="#"><img src="../../public/gray.png" alt="" v-model="hotel_pic"></a>
+                    <a href="#"><img :src="require('../../public/shopcar/'+item.img)" alt="" v-model="hotel_pic"></a>
                 </div>
                 <div class="title">
                     <div class="title mlf7" >
@@ -145,7 +145,7 @@
 
 </style>
 <script>
-import a1 from '../../public/gray.png'
+// import a1 from '../../public/gray.png'
 export default {
     data(){
         return{
@@ -178,7 +178,9 @@ export default {
                 // hotel_pic:this.list[index].url,
                 price:this.push[index].price,
                 product_details:this.push[index].product_details,
-                family_id:this.push[index].family_id
+                family_id:this.push[index].family_id,
+                num:'1',
+                img:this.push[index].img
             }
             console.log(object);
             //传信息
@@ -186,7 +188,7 @@ export default {
                 if(res.data.code==200){
                     console.log(res.data.code);
                     //弹窗成功
-                    alert('添加成功')
+                    this.$messagebox.alert("成功加入购物车");
                     // this.$messagebox.confirm("您是否现在前往购物车","提示信息").then(
                     //     (value)=>{
                     //         this.$router.push('/');

@@ -37,15 +37,16 @@
                 >
                 </mt-field>
                 <!-- 验证码 -->
-                <mt-field class="reg-service"
-                type="text" placeholder="输入验证码"
-                :attr="{ maxlength:'4'}" :state=phonecodeState
-                @blur.native.capture="checkPhonecode" v-model="phonecode"
-                >|
-                <!-- 验证码60s倒计时 -->
-                <span v-show="show" @click="getCode">获取验证码</span>
-                <span v-show="!show">{{count}} s</span>
-                </mt-field>
+                    <slide-verify
+                    ref="slideblock"
+                    @success="onSuccess"
+                    @fail="onFail"
+                    :accuracy="accuracy"
+                    :slider-text="text"
+                    v-show="this.checkUsername()&&this.checkPassword()&&this.checkSecpassword()&&this.checkPhone()"
+                    ></slide-verify>
+                    <!-- <div>{{msg}}</div> -->
+<!-- <button @click="handleClick"></button> -->
             </div>
             <!-- 同意隐私条款 -->
             <div class="agree">
@@ -65,6 +66,7 @@
 </template>
 <script>
 export default {
+    name: 'App',
     data(){
         return{
             //初始状态
@@ -81,9 +83,49 @@ export default {
             show: true,
             count: '',
             timer: null,
+            msg: '',
+            text: '向右滑',
+            // 精确度小，可允许的误差范围小；为1时，则表示滑块要与凹槽完全重叠，才能验证成功。默认值为5
+            accuracy: 4,
+            aaa:false
         }
     },
     methods:{
+        //验证码
+        one(){
+            return this.aaa
+        },
+        onSuccess(){
+            console.log('验证通过');
+            // this.$messagebox("提示信息","验证通过 点击确定注册");
+            this.aaa = true
+            },
+            onFail(){
+            console.log('验证不通过');
+            // return false
+            this.aaa = false
+            },
+            // onRefresh(){
+            // console.log('点击了刷新小图标');
+            // this.msg = ''
+            // return false
+            // },
+            // onFulfilled() {
+            // console.log('验证不通过');
+            // return false
+            // },
+            // onAgain() {
+            // console.log('检测到非人为操作的哦！');
+            // this.msg = 'try again';
+            // return false
+            // // 刷新
+            // // this.$refs.slideblock.reset();
+            // },
+            // handleClick() {
+            //     // 父组件直接可以调用刷新方法
+            // this.$refs.slideblock.reset();
+            // },
+
         //用户名判断
         checkUsername(){
             //用户判断
@@ -136,7 +178,6 @@ export default {
                 return false
             }
         },
-
         // 手机号码判断
         checkPhone(){
             //如果手机号码是11位并且是数字则通过 显示√
@@ -171,24 +212,24 @@ export default {
             }
         },
         //60s验证码倒计时
-        getCode(){
-        const TIME_COUNT = 60;
-        if (!this.timer) {
-        this.count = TIME_COUNT;
-        this.show = false;
-        this.timer = setInterval(() => {
-        if (this.count > 0 && this.count <= TIME_COUNT) {
-            this.count--;
-            } else {
-            this.show = true;
-            clearInterval(this.timer);
-            this.timer = null;
-            }
-        }, 1000)
-        }
-        },
+        // getCode(){
+        // const TIME_COUNT = 60;
+        // if (!this.timer) {
+        // this.count = TIME_COUNT;
+        // this.show = false;
+        // this.timer = setInterval(() => {
+        // if (this.count > 0 && this.count <= TIME_COUNT) {
+        //     this.count--;
+        //     } else {
+        //     this.show = true;
+        //     clearInterval(this.timer);
+        //     this.timer = null;
+        //     }
+        // }, 1000)
+        // }
+        // },
     handle(){
-        if(this.checkUsername()&&this.checkPassword()&&this.checkSecpassword()&&this.checkPhone()){
+        if(this.checkUsername()&&this.checkPassword()&&this.checkSecpassword()&&this.checkPhone()&&this.one()){
             //将用户名密码手机号码发送到web服务器
             let object={
                 username:this.username,

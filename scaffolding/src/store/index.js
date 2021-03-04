@@ -4,10 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {},
+    state: {
+        user: [],
+    },
     mutations: {
-        loginOK(state,payload){
-            state.isLogin=1
+        loginOK(state, payload) {
+            state.isLogin = 1
             state.user = payload
         },
     },
