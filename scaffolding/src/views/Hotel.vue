@@ -1,7 +1,11 @@
 <template>
   <div class="Hotel">
     <!-- 导航头区域 -->
-    <header>酒店</header>
+    <mt-header class="header" title="嘉年华酒店推荐">
+      <router-link to="/shopcar" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </router-link>
+    </mt-header>
     <!-- 中心内容区域 -->
     <div class="all">
       <div class="container">
@@ -16,13 +20,13 @@
               <a class="left-img-box" href="http://www.baidu.com">
                 <p>{{ Hotel[0].title }}</p>
                 <div class="left-img">
-                  <img src="https://urlify.cn/uYVBzu" />
+                  <img src="https://urlify.cn/NFZJn2" />
                 </div>
               </a>
               <a class="right-img-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[1].title }}</p>
                 <div class="right-img">
-                  <img src="https://urlify.cn/jq6VRr" alt="" />
+                  <img src="https://urlify.cn/Bv67vu" alt="" />
                 </div>
               </a>
             </div>
@@ -30,19 +34,19 @@
               <a class="bottom-left-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[2].title }}</p>
                 <div class="bottom-left">
-                  <img src="https://urlify.cn/AfERzy" alt="" />
+                  <img src="https://urlify.cn/ArIz2y" alt="" />
                 </div>
               </a>
               <a class="bottom-center-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[3].title }}</p>
                 <div class="bottom-center">
-                  <img src="https://urlify.cn/7beuee" alt="" />
+                  <img src="https://urlify.cn/Q7Frau" alt="" />
                 </div>
               </a>
               <a class="bottom-right-box" href="http://www.baidu.com"
                 ><p>{{ Hotel[4].title }}</p>
                 <div class="bottom-right">
-                  <img src="https://urlify.cn/jQVBJb" alt="" />
+                  <img src="https://urlify.cn/Y3aUZb" alt="" />
                 </div>
               </a>
             </div>
@@ -53,13 +57,13 @@
           <div class="bottom-title">{{ title }}</div>
           <div class="bottom-box">
             <a class="bottomer-left" href="http://www.baidu.com">
-              <img src="https://urlify.cn/uIJfuq" alt="" />
+              <img src="https://urlify.cn/nQveym" alt="" />
             </a>
             <a class="bottomer-center" href="http://www.baidu.com">
-              <img src="https://urlify.cn/AvAFb2" alt="" />
+              <img src="https://urlify.cn/MNjM3q" alt="" />
             </a>
             <a class="bottomer-right" href="http://www.baidu.com">
-              <img src="https://urlify.cn/6JvIJj" alt="" />
+              <img src="https://urlify.cn/im2em2" alt="" />
             </a>
           </div>
         </div>
@@ -72,7 +76,7 @@
 export default {
   data() {
     return {
-      title: "携程精选榜",
+      title: "嘉年华精选榜",
       Hotel: [
         { title: "门店新客" },
         { title: "商户大促" },
@@ -85,6 +89,15 @@ export default {
 };
 </script>
 <style>
+.Hotel .header {
+  height: 3rem;
+  width: 100%;
+  text-align: center;
+  line-height: 4rem;
+  color: #fff;
+  font-size: 1.2rem;
+  background: #468ce6;
+}
 .Hotel .all {
   width: 100%;
 }
@@ -109,7 +122,7 @@ export default {
 }
 .Hotel .imgs-box {
   width: 100%;
-  height: 16rem;
+  height: 14.8rem;
   margin-top: 1rem;
   background-color: #9ac7f7;
   border-radius: 5%;
@@ -121,9 +134,11 @@ export default {
 .Hotel .left-img-box {
   display: block;
   cursor: pointer;
-  width: 64%;
+  width: 63%;
   height: 6.5rem;
   margin: 1rem 1.5%;
+  margin-top: 0.6rem;
+  margin-left: 0.5rem;
   border-radius: 5%;
   background-color: #fff;
 }
@@ -163,12 +178,13 @@ export default {
   width: 30.66%;
   height: 6.5rem;
   border-radius: 5%;
-  margin-right: 1.5%;
-  margin-top: 1rem;
+  margin-right: 0.5rem;
+  margin-top: 0.6rem;
   background-color: #fff;
 }
 .Hotel .bottom-flex {
   display: flex;
+  margin-top: -0.4rem;
   justify-content: space-between;
 }
 .Hotel .bottom-left-box {
