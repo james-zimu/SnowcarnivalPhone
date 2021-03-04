@@ -6,7 +6,7 @@
                 <h1>看世界</h1>
             </div>
             <div class="place-name">
-                <a href="javascript:;"><span class="iconfont">&#xe503;</span>郑州</a>
+                <a href="javascript:;">{{location}}</a>
             </div>
         </div>
         <!-- 24小时热门 -->
@@ -17,7 +17,7 @@
                     <div class="slide-inner">
                         <div v-for="(list) of community.slice(0,6)" :key="list.cid">
                             <a href="javascript:;" class="hot-img">
-                                <img :src="require('../../' + list.image)" alt="">
+                                <a href="javascript:;"><img :src="require('../../public/images/Yuan/' + list.image)" alt=""></a>
                             </a>
                             <a href="javascript:;" class="hot-text">
                                 <p>{{list.title}}</p>
@@ -30,7 +30,7 @@
                     <div class="slide-inner">
                         <div v-for="(list) of community.slice(6,12)" :key="list.cid">
                             <a href="javascript:;" class="hot-img">
-                                <img :src="require('../../' + list.image)" alt="">
+                                <img :src="require('../../public/images/Yuan/' + list.image)" alt="">
                             </a>
                             <a href="javascript:;" class="hot-text">
                                 <p>{{list.title}}</p>
@@ -43,7 +43,7 @@
                     <div class="slide-inner">
                         <div v-for="(list) of community.slice(12,18)" :key="list.cid">
                             <a href="javascript:;" class="hot-img">
-                                <img :src="require('../../' + list.image)" alt="">
+                                <img :src="require('../../public/images/Yuan/' + list.image)" alt="">
                             </a>
                             <a href="javascript:;" class="hot-text">
                                 <p>{{list.title}}</p>
@@ -58,33 +58,39 @@
         <div class="everyone">
             <div class="everyone-chat">大家都在聊</div>
             <div class="everyone-data">
-                <div class="data-inner" v-for="item of everyone" :key="item.uid">
-                    <div class="img">
-                        <img :src="require('../../' + item.image)" alt="">
-                    </div>
+                <a href="#/remark" v-for="(item,index) of everyone" :key="index"  @click="cli(item.number)"  class="data-inner" >
+                    <div>
+                        <div class="img">
+                            <img :src="require('../../public/images/Yuan/' + item.cover)" alt="">
+                        </div>
                     <div class="text">
-                        <p>{{item.text}}</p>
-                        <div>
-                            <a href="javascript:;">
-                                <img :src="require('../../' + item.portrait)" alt="">
-                                <span>{{item.username}}</span>
-                            </a>
-                            <a href="javascript:;"><span></span></a>
+                        <p>{{item.title}}</p>
+                            <div>
+                                <a href="javascript:;">
+                                    <img :src="require('../../public/images/Yuan/' + item.photo)" alt="">
+                                    <span>{{item.uname}}</span>
+                                </a>
+                                <a href="javascript:;" class="fr praise"><span class="iconfont">&#xe508;</span>{{item.love}}</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
+                
             </div>
         </div>
-        <foot></foot>
+        <foot class="foot"></foot>
     </div>
 </template>
 <style>
 /* 看世界 */
+.community{
+    margin-bottom: 6rem;
+}
 .community .look-world{
     height: 4.375rem;
     background: #458ce6;
     position: relative;
-    width: 25.875rem;
+    width: 23.4375rem;
 }
 .community .look-world .world-inner{
     padding-top: 1.875rem;
@@ -106,15 +112,15 @@
 .community .look-world .place-name a span{
     font-size: 1.25rem;
 }
-/* 24小时热门 */
+/* 社区分类 */
 .community .hot{
     height: 11.25rem;
-    width: 25.875rem;
+    width: 23.4375rem;
     margin-bottom: 1.25rem;
 }
 .community .hour{
     font-size: 1.25rem;
-    width: 24rem;
+    width: 21.5rem;
     font-weight: 600;
     padding: 0.625rem 0.93rem;
 }
@@ -124,7 +130,7 @@
 .community .hot .slide-inner>div{
     height: 2.5rem;
     display: inline-block;
-    width: 12rem;
+    width: 10.7rem;
     position: relative;
     margin-bottom: 0.875rem;
 }
@@ -136,7 +142,7 @@
     position: absolute;
 }
 .community .hot .slide-inner .hot-text{
-    width: 8.25rem;
+    width: 7.5rem;
     display: inline-block;
     padding-top: 0.31rem;
     position: absolute;
@@ -149,6 +155,8 @@
     white-space: nowrap;
 }
 .community .hot .slide-inner .hot-text span{
+    width: 6.5rem;
+    display: inline-block;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
@@ -177,7 +185,7 @@
 }
 /* 大家都在聊 */
 .community .everyone{
-    width: 25.875rem;
+    width: 23.4375rem;
 }
 .community .everyone .everyone-chat{
     font-size: 1.25rem;
@@ -185,13 +193,25 @@
     padding: 1.25rem 0.9rem;
 }
 .community .everyone .everyone-data{
-    height: 60rem;
+    height: 64rem;
+}
+.community .everyone .everyone-data>a{
+    color: #222;
 }
 .community .everyone .everyone-data .data-inner{
-    width: 12.1875rem;
+    width: 11rem;
     margin-left: 0.4375rem;
-    display: inline-block;
+    display: block;
     margin-bottom: 0.625rem;
+    float: left;
+}
+.community .everyone-data .data-inner:nth-child(2){
+    margin-top: 5rem;
+}
+.community .everyone-data .data-inner:nth-child(3),
+.community .everyone-data .data-inner:nth-child(5){
+
+    margin-top: -5rem;
 }
 .community .everyone-data .data-inner .img{
     height: 15.375rem;
@@ -213,34 +233,58 @@
 .community .everyone-data .data-inner .text a{
     color: #abb2ba;
     font-size: 0.875rem;
+    line-height: 1.5rem;
+    padding-right: 0.5rem;
+}
+.community .everyone-data .data-inner .praise span{
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    padding-right: 0.5rem;
+    color: #ff0000;
+}
+.community .foot .h-comm{
+  background: #eee;
+  color: #458ce6 !important;
+}
+.fr{
+    float: right;
 }
 </style>
 <script>
+import foot from '../components/foot.vue';
 export default {
+    components: { foot },
     data(){
         return{
             SiteName:'',
             everyone:{},
-            community:[]
+            community:[],
+            location:'',
+            index:''
         }
     },
     methods:{
         region(){
+            let _this = this
             var native = new BMap.LocalCity();
             native.get(function(r){
-                alert(r.name);
+                _this.location = r.name
             })
+        },
+        cli(number){
+            console.log(number)
+            this.$store.commit("changnum",100)
         }
     },
     mounted(){
         this.axios.get("/everyone").then(res=>{
             this.everyone = res.data.results;
-            console.log(this.everyone);
+            // console.log(this.everyone)
         });
         this.axios.get("/community").then(res=>{
             this.community = res.data.results;
-            console.log(this.community);
         });
-    }
+        this.region()
+    },
 }
 </script>
