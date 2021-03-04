@@ -45,7 +45,6 @@ server.post('/addcar', (req, res) => {
     // let details=req.body.hotel_pic;
     let price = req.body.price;
     let family_id = req.body.family_id;
-
     let product_details = req.body.product_details
     console.log(family_id, title, price, product_details);
     let sql = 'INSERT INTO sc_car SET family_id=?,title=?,price=?,product_details=?'
@@ -106,7 +105,7 @@ server.post('/login', (req, res) => {
     let uname = req.body.username;
     let upwd = req.body.password;
     //SQL语句
-    let sql = 'SELECT uid,uname,phone FROM sc_user WHERE uname=? AND upwd=MD5(?)';
+    let sql = 'SELECT uid,uname,phone,photo FROM sc_user WHERE uname=? AND upwd=MD5(?)';
     // console.log(sql);
     pool.query(sql, [uname, upwd], (error, results) => {
 
@@ -122,7 +121,7 @@ server.post('/login', (req, res) => {
 //获取租车数据库中数据并发送到web服务器
 server.get('/carrental', (req, res) => {
     // SQL语句以获取分类表的数据
-    let sql1 = 'SELECT rid,details_img,price,classification FROM sc_carrental1 ORDER BY rid';
+    let sql1 = 'SELECT rid,img,price,classification FROM sc_carrental1 ORDER BY rid';
     // 执行SQL语句
     pool.query(sql1, (error, results) => {
         if (error) throw error;
@@ -135,52 +134,42 @@ server.get('/carrental', (req, res) => {
 server.post('/carrentalshop', (req, res) => {
     //获取租车页面接口传过来的数据
     let price = req.body.shop;
+    let arr = price.join(',')
     console.log(price);
-    if (price.length > 1) {
-        let arr = price.join(',')
-            // let sql = 'SELECT rmodle,price,classification FROM sc_carrental1 ORDER BY rid';
-        let sql = 'select * from sc_carrental1 where price in (' + arr + ')'
-        console.log(sql);
-        // // 执行SQL语句
-        pool.query(sql, (error, results) => {
-            if (error) throw error;
-            res.send({ message: 'ok', code: 200, results: results });
-            let carlist = [];
-            //循环results中的内容
-            for (let i = 0; i < results.length; i++) {
-                let obj = results[i];
-                //获取对象中的img值和购物车数据库中对接
-                let details_img = obj.details_img;
-                //获取对象中的rmodle值和购物车数据库中对接
-                let details_top = obj.rmodle;
-                //获取对象中的classification值和购物车数据库中对接
-                let time = obj.classification;
-                //获取对象中的price值和购物车数据库中对接
-                let price = obj.price;
-                //获取对象中的num值和购物车中数据对接
-                let num = obj.num;
-                //获取对象中的logo_name值和购物车中数据对接
-                let logo_name = obj.logo_name;
-                //使用sql语句将获取的值插入购入车数据库
-                let sql1 = 'insert into sc_car (details_img, details_top, time, price ,num,logo_name) value (?,?,?,?,?,?)'
-                pool.query(sql1, [details_img, details_top, time, price, num, logo_name], (error, results) => {
-                    // if (error) throw error;
-                    console.log(error);
-                    // if (error) throw error;
-                    // res.send({ message: 'ok', code: 200 });
-                });
-            }
-        });
-    } else { //???????????????????????????????
-        let sql = 'select * from sc_carrental1 where price in (' + arr + ')'
-        pool.query(sql, (error, results) => {
-            if (error) throw error;
-            res.send({ message: 'ok', code: 200, results: results });
-        });
-    }
-    // console.log(price);
     // SQL语句以获取分类表的数据
-
+    // let sql = 'SELECT rmodle,price,classification FROM sc_carrental1 ORDER BY rid';
+    let sql = 'select * from sc_carrental1 where price in (' + arr + ')'
+    console.log(sql);
+    // // 执行SQL语句
+    pool.query(sql, (error, results) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, results: results });
+        let carlist = [];
+        //循环results中的内容
+        for (let i = 0; i < results.length; i++) {
+            let obj = results[i];
+            //获取对象中的img值和购物车数据库中对接
+            let details_img = obj.img;
+            //获取对象中的rmodle值和购物车数据库中对接
+            let details_top = obj.rmodle;
+            //获取对象中的classification值和购物车数据库中对接
+            let time = obj.classification;
+            //获取对象中的price值和购物车数据库中对接
+            let price = obj.price;
+            //获取对象中的num值和购物车中数据对接
+            let num = obj.num;
+            //获取对象中的logo_name值和购物车中数据对接
+            let logo_name = obj.logo_name;
+            //使用sql语句将获取的值插入购入车数据库
+            let sql1 = 'insert into sc_car (details_img, details_top, time, price ,num,logo_name) value (?,?,?,?,?,?)'
+            pool.query(sql1, [details_img, details_top, time, price, num, logo_name], (error, results) => {
+                // if (error) throw error;
+                console.log(error);
+                // if (error) throw error;
+                // res.send({ message: 'ok', code: 200 });
+            });
+        }
+    });
 });
 
 
@@ -193,7 +182,87 @@ server.get('/getcar', (req, res) => {
     pool.query(sql, (err, result) => {
         if (err) throw err;
         res.send({ message: 'ok', code: 200, result: result });
-        console.log(result);
+    });
+});
+//后台重新计算商品的总价，确保数据的可靠性
+server.get("/total", (req, res) => {
+    var sql = "select cid,price,num from sc_car order by cid";
+    //执行sql语句
+    pool.query(sql, (err, result) => {
+        if (err) throw err;
+        var price = 0;
+        for (let key in result) {
+            price += result[key].price * result[key].num;
+        }
+        console.log(price)
+        res.send({ message: "ok", code: 200, result: price })
+    })
+});
+//根据用户的增加操作更新数据库的数量，确保调用计算总价接口时总价的正确性
+server.post(`/addnum`, (req, res) => {
+    //获取前台传入的该商品的cid
+    let cid = req.body.cid;
+    //获取前台传入的该cid商品的数量
+    let num = req.body.num;
+    num = ++num;
+    console.log(num)
+    var sql = "update sc_car set num=? where cid=?";
+    pool.query(sql, [num, cid], (err, result) => {
+        if (err) throw err;
+        res.send({ message: "ok", code: 200 })
+    })
+})
+server.post(`/lessnum`, (req, res) => {
+    //获取前台传入的该商品的cid
+    let cid = req.body.cid;
+    //获取前台传入的该cid商品的数量
+    let num = req.body.num;
+    num = --num;
+    console.log(num)
+    var sql = "update sc_car set num=? where cid=?";
+    pool.query(sql, [num, cid], (err, result) => {
+        if (err) throw err;
+        res.send({ message: "ok", code: 200 })
+    })
+})
+
+//删除用户的购物车商品
+server.post(`/shopcardelete`, (req, res) => {
+    //获取到前端发来的cid值
+    let cid = req.body.cid;
+    // 删除数据库的sql语句
+    console.log(cid);
+    let sql = 'DELETE FROM `sc_car` WHERE (cid=?)'
+    pool.query(sql, [cid], (err, results) => {
+        if (err) throw err;
+        res.send({ message: 'ok', code: 200 })
+    })
+});
+
+//删除前端需要删除的数据选项
+server.post('/scheduledelete', (req, res) => {
+    //获取到前端发来的sid值
+    let sid = req.body.sid;
+    // 删除数据库的sql语句
+    console.log(sid);
+    let sql = 'DELETE FROM `sc_schedule` WHERE (sid=?)'
+    pool.query(sql, [sid], (error, results) => {
+        console.log(sql);
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200 })
+    })
+});
+
+
+//获取日程接口
+server.get('/schedule', (req, res) => {
+    // SQL语句以获取分类表的数据
+    let sql = 'SELECT sid,uid,udate,udetail FROM sc_schedule ORDER BY sid';
+    // 执行SQL语句
+    pool.query(sql, (error, results) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, results: results });
+        // console.log(results);
     });
 });
 //后台重新计算商品的总价，确保数据的可靠性
@@ -309,13 +378,44 @@ server.get("/fcategory", (req, res) => {
 
 
 
+//完成日程添加接口
+server.post('/schedule', (req, res) => {
+    //获取时间信息和输入信息
+    let udate = req.body.udate;
+    let udetail = req.body.udetail;
+    // console.log(udetail, udate);
+    // 导入数据库的sql语句
+    let sql = 'INSERT INTO sc_schedule(udate,udetail) VALUES(?,?)'
+    pool.query(sql, [udate, udetail], (error, results) => {
+        // if (error) throw error;
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200 });
+    })
+});
+
+
+//首页底部的广告及内容
+// server.get("/fcategory", (req, res) => {
+//     let sql = 'SELECT lid,images,title,content FROM sc_home_page ORDER BY lid';
+//     pool.query(sql, (error, results) => {
+//         if (error) throw error;
+//         res.send({
+//             message: 'ok',
+//             code: 200,
+//             results: results
+//         })
+//     })
+// })
+
+
+
 //保存用户的评论
 server.post('/remark', (req, res) => {
     let uname = req.body.uname;
     let remcontent = req.body.msg;
     let photo = req.body.photo;
     let number = req.body.number;
-    let sql = 'INSERT INTO sc_remark(number,uname,photo,content) VALUES(?,?,?,?)';
+    let sql = 'INSERT INTO sc_remark(number,uname,photo,remcontent) VALUES(?,?,?,?)';
     pool.query(sql, [number, uname, photo, remcontent], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result });
@@ -326,12 +426,11 @@ server.post('/remark', (req, res) => {
 server.get('/article', (req, res) => {
     // console.log(req.query.id)
     let number = req.query.id;
-    let sql = 'SELECT uname,photo,image,content FROM sc_share WHERE NUMBER=?';
+    let sql = 'SELECT * FROM sc_share WHERE NUMBER=?';
     pool.query(sql, [number], (error, result) => {
         if (error) throw error;
         res.send({ message: 'ok', code: 200, result: result })
     })
-
 })
 
 //向数据库请求当前网页的留言与评论内容

@@ -26,20 +26,42 @@
       </div>
     </div>
 </template>
-<style scoped>
-  h4{
-    margin-top: 5px;
-  }
-  .iconfont{
-    font-size: 1.25rem;
-  }
+<style>
+.footer{
+  height: 3.5rem;
+  position: fixed;
+  bottom: -8px;
+  background: #fff;
+}
+.footer .footerbg{
+  background: #ddd;
+  color: #3477ec !important;
+}
+.footer .footer-inner{
+  display: inline-block;
+  width: 4.6875rem;
+  height: 3.2rem;
+  text-align: center;
+  color: #3c3c3c;
+  padding-top: 0.4rem;
+}
+.footer .footer-inner span{
+  font-size: 1.1rem;
+}
+.footer .footer-inner p{
+  padding-top: 0.2rem;
+}
 </style>
 <script>
 export default {
-    data(){
-        return{
-            selected:''
-        }
+  data(){
+    return{
+
     }
+  },
+  methods:{
+   
+  }
 }
 </script>
+
