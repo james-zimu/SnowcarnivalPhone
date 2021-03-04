@@ -45,10 +45,10 @@
                 </div>
                 <!-- 4个图标 -->
                 <div class="reg-way">
-                    <a href="#"><span class="iconfont">&#xe505;</span></a>
-                    <a href="#"><span class="iconfont">&#xe698;</span></a>
-                    <a href="#"><span class="iconfont">&#xe509;</span></a>
-                    <a href="#"><span class="iconfont">&#xe605;</span></a>
+                    <a href="https://weixin.qq.com/"><span class="iconfont">&#xe505;</span></a>
+                    <a href="https://im.qq.com/mobileqq/"><span class="iconfont">&#xe698;</span></a>
+                    <!-- <a href="#"><span class="iconfont">&#xe510;</span></a>
+                    <a href="#"><span class="iconfont">&#xe605;</span></a> -->
                 </div>
                 <!-- 隐私条款 -->
                 <div class="agree">
@@ -125,8 +125,7 @@ export default {
                 let userString = JSON.stringify(res.data.result)
                 window.sessionStorage.setItem('user',userString)
                 //登录成功
-                this.$router.push('/register');
-                // this.$router.push('/register');
+                this.$router.push('/hotel_details');
                 }
                 if(res.data.code == 201){//登陆失败
                 this.$messagebox('提示信息','用户名或密码错误')

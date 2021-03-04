@@ -8,7 +8,7 @@
         <div class="container">
             <div  class="details" v-for="(item,index) in push" :key="index">
                 <div>
-                    <a href="#"><img src="../../public/gray.png" alt="" ></a>
+                    <a href="#"><img :src="require('../../public/shopcar/'+item.img)" alt="" ></a>
                 </div>
                 <div class="title">
                     <div class="title mlf7" >
@@ -152,7 +152,7 @@
 
 </style>
 <script>
-import a1 from '../../public/gray.png'
+// import a1 from '../../public/gray.png'
 export default {
     data(){
         return{
@@ -175,7 +175,9 @@ export default {
                 // hotel_pic:this.list[index].url,
                 price:this.push[index].price,
                 product_details:this.push[index].product_details,
-                family_id:this.push[index].family_id
+                family_id:this.push[index].family_id,
+                num:'1',
+                img:this.push[index].img
             }
             console.log(object);
             //传信息

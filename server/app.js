@@ -38,17 +38,20 @@ server.use(cors({
     origin: ['http://localhost:8080', 'http://127.0.0.1:8080']
         // origin: ['http://0.0.0.0:8080', 'http://127.0.0.1:8080']
 }));
-
+// 插入购物车
 server.post('/addcar', (req, res) => {
     //获取酒店名字 照片 价格 产品详情
-    let title = req.body.title;
+    let details_top = req.body.title;
     // let details=req.body.hotel_pic;
     let price = req.body.price;
-    let family_id = req.body.family_id;
-    let product_details = req.body.product_details
-    console.log(family_id, title, price, product_details);
-    let sql = 'INSERT INTO sc_car SET family_id=?,title=?,price=?,product_details=?'
-    pool.query(sql, [family_id, title, price, product_details], (error, result) => {
+    let logo_name = req.body.family_id;
+
+    let time = req.body.product_details;
+    let num = req.body.num;
+    let details_img = req.body.img
+    console.log(details_img, num, logo_name, details_top, price, time);
+    let sql = 'INSERT INTO sc_car SET details_img=?,num=?,logo_name=?,details_top=?,price=?,time=?'
+    pool.query(sql, [details_img, num, logo_name, details_top, price, time], (error, result) => {
         if (error) throw error
         res.send({ message: 'ok', code: 200 })
     })
@@ -56,7 +59,7 @@ server.post('/addcar', (req, res) => {
 //获取门票的接口
 server.get('/ticket', (req, res) => {
         //sql获取购物车表信息
-        let sql = 'SELECT ticked_id,family_id,title,product_details,price,comment,number,address,city,tips1,tips2,tips3,itemDetails,play,top FROM sc_ticket ORDER BY ticked_id';
+        let sql = 'SELECT img,ticked_id,family_id,title,product_details,price,comment,number,address,city,tips1,tips2,tips3,itemDetails,play,top FROM sc_ticket ORDER BY ticked_id';
         //执行sql
         pool.query(sql, (error, results) => {
             // console.log(results);
@@ -67,7 +70,7 @@ server.get('/ticket', (req, res) => {
     //获取酒店详情的接口
 server.get('/hotel', (req, res) => {
         //sql获取购物车表信息
-        let sql = 'SELECT hotel_id,family_id,title,product_details,price,comment,number,address,city,tips1,tips2,tips3,itemDetails,play,top FROM sc_hotel ORDER BY hotel_id';
+        let sql = 'SELECT img,hotel_id,family_id,title,product_details,price,comment,number,address,city,tips1,tips2,tips3,itemDetails,play,top FROM sc_hotel ORDER BY hotel_id';
         //执行sql
         pool.query(sql, (error, results) => {
             console.log(results);
@@ -121,7 +124,7 @@ server.post('/login', (req, res) => {
 //获取租车数据库中数据并发送到web服务器
 server.get('/carrental', (req, res) => {
     // SQL语句以获取分类表的数据
-    let sql1 = 'SELECT rid,img,price,classification FROM sc_carrental1 ORDER BY rid';
+    let sql1 = 'SELECT rid,details_img,price,classification FROM sc_carrental1 ORDER BY rid';
     // 执行SQL语句
     pool.query(sql1, (error, results) => {
         if (error) throw error;
@@ -129,6 +132,8 @@ server.get('/carrental', (req, res) => {
         // console.log(results);
     });
 });
+
+
 
 //获取租车前端发来的要加入购物车的选项
 server.post('/carrentalshop', (req, res) => {
@@ -149,7 +154,7 @@ server.post('/carrentalshop', (req, res) => {
         for (let i = 0; i < results.length; i++) {
             let obj = results[i];
             //获取对象中的img值和购物车数据库中对接
-            let details_img = obj.img;
+            let details_img = obj.details_img;
             //获取对象中的rmodle值和购物车数据库中对接
             let details_top = obj.rmodle;
             //获取对象中的classification值和购物车数据库中对接
@@ -254,86 +259,6 @@ server.post('/scheduledelete', (req, res) => {
 });
 
 
-//获取日程接口
-server.get('/schedule', (req, res) => {
-    // SQL语句以获取分类表的数据
-    let sql = 'SELECT sid,uid,udate,udetail FROM sc_schedule ORDER BY sid';
-    // 执行SQL语句
-    pool.query(sql, (error, results) => {
-        if (error) throw error;
-        res.send({ message: 'ok', code: 200, results: results });
-        // console.log(results);
-    });
-});
-//后台重新计算商品的总价，确保数据的可靠性
-server.get("/total", (req, res) => {
-    var sql = "select cid,price,num from sc_car order by cid";
-    //执行sql语句
-    pool.query(sql, (err, result) => {
-        if (err) throw err;
-        var price = 0;
-        for (let key in result) {
-            price += result[key].price * result[key].num;
-        }
-        console.log(price)
-        res.send({ message: "ok", code: 200, result: price })
-    })
-});
-//根据用户的增加操作更新数据库的数量，确保调用计算总价接口时总价的正确性
-server.post(`/addnum`, (req, res) => {
-    //获取前台传入的该商品的cid
-    let cid = req.body.cid;
-    //获取前台传入的该cid商品的数量
-    let num = req.body.num;
-    num = ++num;
-    console.log(num)
-    var sql = "update sc_car set num=? where cid=?";
-    pool.query(sql, [num, cid], (err, result) => {
-        if (err) throw err;
-        res.send({ message: "ok", code: 200 })
-    })
-})
-server.post(`/lessnum`, (req, res) => {
-    //获取前台传入的该商品的cid
-    let cid = req.body.cid;
-    //获取前台传入的该cid商品的数量
-    let num = req.body.num;
-    num = --num;
-    console.log(num)
-    var sql = "update sc_car set num=? where cid=?";
-    pool.query(sql, [num, cid], (err, result) => {
-        if (err) throw err;
-        res.send({ message: "ok", code: 200 })
-    })
-})
-
-//删除用户的购物车商品
-server.post(`/shopcardelete`, (req, res) => {
-    //获取到前端发来的cid值
-    let cid = req.body.cid;
-    // 删除数据库的sql语句
-    console.log(cid);
-    let sql = 'DELETE FROM `sc_car` WHERE (cid=?)'
-    pool.query(sql, [cid], (err, results) => {
-        if (err) throw err;
-        res.send({ message: 'ok', code: 200 })
-    })
-});
-
-//删除前端需要删除的数据选项
-server.post('/scheduledelete', (req, res) => {
-    //获取到前端发来的sid值
-    let sid = req.body.sid;
-    // 删除数据库的sql语句
-    console.log(sid);
-    let sql = 'DELETE FROM `sc_schedule` WHERE (sid=?)'
-    pool.query(sql, [sid], (error, results) => {
-        console.log(sql);
-        if (error) throw error;
-        res.send({ message: 'ok', code: 200 })
-    })
-});
-
 
 //获取日程接口
 server.get('/schedule', (req, res) => {
@@ -347,20 +272,7 @@ server.get('/schedule', (req, res) => {
     });
 });
 
-//完成日程添加接口
-server.post('/schedule', (req, res) => {
-    //获取时间信息和输入信息
-    let udate = req.body.udate;
-    let udetail = req.body.udetail;
-    // console.log(udetail, udate);
-    // 导入数据库的sql语句
-    let sql = 'INSERT INTO sc_schedule(udate,udetail) VALUES(?,?)'
-    pool.query(sql, [udate, udetail], (error, results) => {
-        // if (error) throw error;
-        if (error) throw error;
-        res.send({ message: 'ok', code: 200 });
-    })
-});
+
 
 
 //首页底部的广告及内容
@@ -378,34 +290,6 @@ server.get("/fcategory", (req, res) => {
 
 
 
-//完成日程添加接口
-server.post('/schedule', (req, res) => {
-    //获取时间信息和输入信息
-    let udate = req.body.udate;
-    let udetail = req.body.udetail;
-    // console.log(udetail, udate);
-    // 导入数据库的sql语句
-    let sql = 'INSERT INTO sc_schedule(udate,udetail) VALUES(?,?)'
-    pool.query(sql, [udate, udetail], (error, results) => {
-        // if (error) throw error;
-        if (error) throw error;
-        res.send({ message: 'ok', code: 200 });
-    })
-});
-
-
-//首页底部的广告及内容
-// server.get("/fcategory", (req, res) => {
-//     let sql = 'SELECT lid,images,title,content FROM sc_home_page ORDER BY lid';
-//     pool.query(sql, (error, results) => {
-//         if (error) throw error;
-//         res.send({
-//             message: 'ok',
-//             code: 200,
-//             results: results
-//         })
-//     })
-// })
 
 
 
@@ -444,29 +328,7 @@ server.get('/beforrem', (req, res) => {
     })
 })
 
-//删除用户的购物车商品
-server.post(`/shopcardelete`, (req, res) => {
-    //获取到前端发来的cid值
-    let cid = req.body.cid;
-    // 删除数据库的sql语句
-    console.log(cid);
-    let sql = 'DELETE FROM `sc_car` WHERE (cid=?)'
-    pool.query(sql, [cid], (err, results) => {
-        if (err) throw err;
-        res.send({ message: 'ok', code: 200 })
-    })
-});
-//获取日程接口
-server.get('/schedule', (req, res) => {
-    // SQL语句以获取分类表的数据
-    let sql = 'SELECT sid,uid,udate,udetail FROM sc_schedule ORDER BY sid';
-    // 执行SQL语句
-    pool.query(sql, (error, results) => {
-        if (error) throw error;
-        res.send({ message: 'ok', code: 200, results: results });
-        // console.log(results);
-    });
-});
+
 //完成日程添加接口
 server.post('/schedule', (req, res) => {
     //获取时间信息和输入信息
@@ -481,23 +343,8 @@ server.post('/schedule', (req, res) => {
     })
 });
 
-//删除前端需要删除的数据选项
-server.post('/scheduledelete', (req, res) => {
-    //获取到前端发来的sid值
-    let sid = req.body.sid;
-    // 删除数据库的sql语句
-    console.log(sid);
-    let sql = 'DELETE FROM `sc_schedule` WHERE (sid=?)'
-    pool.query(sql, [sid], (error, results) => {
-        console.log(sql);
-        if (error) throw error;
-        res.send({ message: 'ok', code: 200 })
-    })
-});
-// 指定服务器对象监听的端口号
-server.listen(3000, () => {
-    console.log('server is running...');
-});
+
+
 
 server.get('/everyone', (req, res) => {
     //mysql语句
@@ -519,4 +366,11 @@ server.get('/community', (req, res) => {
         res.send({ message: 'ok', code: 200, results: results });
         console.log(results);
     })
+});
+
+
+
+// 指定服务器对象监听的端口号
+server.listen(3000, () => {
+    console.log('server is running...');
 });

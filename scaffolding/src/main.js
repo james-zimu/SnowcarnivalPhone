@@ -41,7 +41,10 @@ import { TabContainer, TabContainerItem } from 'mint-ui';
 
 Vue.component(TabContainer.name, TabContainer);
 Vue.component(TabContainerItem.name, TabContainerItem);
-
+//引入验证码插件
+import vue from 'vue';
+import SlideVerify from 'vue-monoplasty-slide-verify';
+Vue.use(SlideVerify);
 //引入mint ui 复选按钮
 import { Checklist } from 'mint-ui';
 
