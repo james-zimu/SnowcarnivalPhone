@@ -17,6 +17,9 @@ import MapNav from '../views/MapNav.vue'
 Vue.use(VueRouter)
 
 const routes = [{
+        path: '/',
+        component: HomePage
+    }, {
         path: '/carrental',
         component: CarRental
     }, {
@@ -30,7 +33,6 @@ const routes = [{
         path: '/trip',
         component: Trip
     },
-
     {
         path: "/hotel",
         component: Hotel
@@ -38,10 +40,6 @@ const routes = [{
     {
         path: '/remark',
         component: remark
-    },
-    {
-        path: '/',
-        component: HomePage
     },
     {
         path: '/ticket',

@@ -345,6 +345,56 @@ server.get('/beforrem', (req, res) => {
     })
 })
 
+//删除用户的购物车商品
+server.post(`/shopcardelete`, (req, res) => {
+    //获取到前端发来的cid值
+    let cid = req.body.cid;
+    // 删除数据库的sql语句
+    console.log(cid);
+    let sql = 'DELETE FROM `sc_car` WHERE (cid=?)'
+    pool.query(sql, [cid], (err, results) => {
+        if (err) throw err;
+        res.send({ message: 'ok', code: 200 })
+    })
+});
+//获取日程接口
+server.get('/schedule', (req, res) => {
+    // SQL语句以获取分类表的数据
+    let sql = 'SELECT sid,uid,udate,udetail FROM sc_schedule ORDER BY sid';
+    // 执行SQL语句
+    pool.query(sql, (error, results) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200, results: results });
+        // console.log(results);
+    });
+});
+//完成日程添加接口
+server.post('/schedule', (req, res) => {
+    //获取时间信息和输入信息
+    let udate = req.body.udate;
+    let udetail = req.body.udetail;
+    // console.log(udetail, udate);
+    // 导入数据库的sql语句
+    let sql = 'INSERT INTO sc_schedule(udate,udetail) VALUES(?,?)'
+    pool.query(sql, [udate, udetail], (error, results) => {
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200 });
+    })
+});
+
+//删除前端需要删除的数据选项
+server.post('/scheduledelete', (req, res) => {
+    //获取到前端发来的sid值
+    let sid = req.body.sid;
+    // 删除数据库的sql语句
+    console.log(sid);
+    let sql = 'DELETE FROM `sc_schedule` WHERE (sid=?)'
+    pool.query(sql, [sid], (error, results) => {
+        console.log(sql);
+        if (error) throw error;
+        res.send({ message: 'ok', code: 200 })
+    })
+});
 // 指定服务器对象监听的端口号
 server.listen(3000, () => {
     console.log('server is running...');
