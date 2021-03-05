@@ -3,8 +3,11 @@
         <div class="login">
             <!-- 顶部导航 -->
              <mt-header class="header" title="嘉年华会员登录">
-                <router-link to="/shopcar" slot="left">
-                <mt-button class="zhuce" icon="back">注册(我的)</mt-button>
+                <router-link to="/" slot="left">
+                <mt-button class="zhuce"> < 返回</mt-button>
+                </router-link>
+                <router-link to="/register" slot="right">
+                    <mt-button class="zhuce" >注册 ></mt-button>
                 </router-link>
             </mt-header>
             <!-- 内容区域 -->
@@ -37,15 +40,14 @@
                     <a href="#">忘记密码</a>
                 </mt-field>
                 <!-- 登录按钮 -->
-                <button class="reg" @click="handle">登录</button>
+                <button class="reg" @click="handle" >登录</button>
+                <button class="handle-show" @click="handle" v-show="this.checkUsername() && this.checkPassword()" >登录</button>
                 <!-- 2种手机的验证方式 -->
                 <div class="phone">
-                    <a href="#" >手机验证码登录</a>
-                    <a href="#" class="phone-right ">境外手机密码登录</a>
+                    
                 </div>
                 <!-- 4个图标 -->
                 <div class="reg-way">
-                   
                 </div>
                 <!-- 隐私条款 -->
                 <div class="agree">
@@ -80,11 +82,11 @@ export default {
                 return true; //返回结果
             }else{ //否则
                 //提示
-                this.$toast({
-                    message:"用户名格式错误",//提示错误
-                    position:"middle",//在中间显示
-                    duration:"1000",//显示1000毫秒
-                });
+                // this.$toast({
+                //     message:"用户名格式错误",//提示错误
+                //     position:"middle",//在中间显示
+                //     duration:"1000",//显示1000毫秒
+                // });
                 this.usernameState="error";//判断错误显示后面图标
                 return false;//返回错误
             }
@@ -97,11 +99,11 @@ export default {
             this.passwordState = "";//判断正确取消后面的验证图标显示
             return true;
         } else {
-            this.$toast({
-            message: "密码格式错误",
-            position: "middle",
-            duration:"1000"
-            });
+            // this.$toast({
+            // message: "密码格式错误",
+            // position: "middle",
+            // duration:"1000"
+            // });
             this.passwordState = "error";//判断错误显示后面图标
             return false;
         }
@@ -147,8 +149,10 @@ export default {
     font-size: 1.2rem;
     background: #468ce6;
   }
-  .login  .header>.zhuce{
+  .login  .zhuce{
       color: #fff;
+      font-size: 0.9rem;
+      font-weight: bolder;
   }
     .login .container{
         padding: 1.25rem;
@@ -192,6 +196,16 @@ export default {
     }
     .login .upwd{
         border-bottom:0.1rem solid gray
+    }
+    .login .handle-show{
+        background: #468ce6;
+        width: 21rem;
+        border-radius: 0.5rem;
+        color: black;
+        height: 2.5rem;
+        margin-top:-2.5rem ;
+        border: 0px;
+        display: block;
     }
 </style>
 

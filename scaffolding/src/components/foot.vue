@@ -16,7 +16,7 @@
         <span class="iconfont">&#xe63e;</span><br>
         <p>行程</p>
       </a>
-      <a href="javascript:;" class="footer-inner h-user" @click="push">
+      <a href="#/userpage" class="footer-inner h-user">
         <span class="iconfont">&#xe502;</span><br>
         <p>我的</p>
       </a>
@@ -56,10 +56,6 @@ export default {
     }
   },
   methods:{
-    push(){
-      this.$router.push('/userpage');
-      location.reload()
-    }
   }
 }
 </script>

@@ -47,9 +47,9 @@
             <div class="num">
               <span>购买数量</span>
               <div>
-                <button @click=btn(false,index)>-</button>
+                <button class="btn1" @click=btn(false,index)>-</button>
                 <input type="text" :value="item.num">
-                <button @click=btn(true,index)>+</button>
+                <button class="btn1" @click=btn(true,index)>+</button>
               </div>
             </div>
           </div>
@@ -290,5 +290,12 @@ export default {
 }
 .ShopCar .logotitle{
   font-size: 1.2rem !important;
+}
+.ShopCar .btn1{
+  border-radius: 0.5rem;
+  color: rgb(112, 112, 112);
+}
+.ShopCar .details img{
+  border-radius: 0.5rem;
 }
 </style>

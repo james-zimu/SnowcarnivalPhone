@@ -139,8 +139,13 @@ server.get('/carrental', (req, res) => {
 server.post('/carrentalshop', (req, res) => {
     //获取租车页面接口传过来的数据
     let price = req.body.shop;
-    let arr = price.join(',')
-    console.log(price);
+    if (price.indexOf(",") != -1) {
+        var arr = price.join(',')
+    } else {
+        var arr = price;
+    }
+    // let arr = price.join(',')
+    console.log(arr, 1);
     // SQL语句以获取分类表的数据
     // let sql = 'SELECT rmodle,price,classification FROM sc_carrental1 ORDER BY rid';
     let sql = 'select * from sc_carrental1 where price in (' + arr + ')'

@@ -43,7 +43,7 @@
       </div>
       <div class="reamark-showword">
         <p>{{ push[0].title }}</p>
-        <span>
+        <span class="remark-content">
           {{ push[0].content }}
         </span>
       </div>
@@ -105,6 +105,11 @@
   </div>
 </template>
 <style>
+.remark .remark-content {
+  display: inline-block;
+  font-size: 1rem;
+  text-indent: 2rem;
+}
 .remark .mint-button--default {
   background-color: white !important;
   box-shadow: none !important;
@@ -270,13 +275,13 @@
 export default {
   data() {
     return {
-      img: "moren.jpg",
+      img: "1.jpg",
       logphoto: "",
       logmessage: "",
       sendmesage: "",
       username: "",
       allmsg: 5,
-      number: 1,
+      number: "",
       push: "",
       // 存储之前用户留言信息
       bmark: "",
@@ -333,6 +338,7 @@ export default {
         this.axios.post("/remark", this.qs.stringify(str)).then((res) => {
           if (res.data.code == 200) {
             this.$toast("发表成功");
+            this.sendmesage = "";
             this.brem();
           }
         });
@@ -349,10 +355,11 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$store.state.uk);
+    this.number = this.$store.state.uk;
     //拿到登录者的头像 放在评论输入框旁
     if (this.$store.state.user.photo == null) {
-      this.img = "moren.jpg";
+      this.img = "1.jpg";
+      this.$store.state.user.photo = "1.jpg";
     } else {
       this.img = this.$store.state.user.photo;
     }

@@ -2,7 +2,7 @@
 <template>
    <div class="trip">
      <!-- 返回头 -->
-      <div class="back"><a href="/"><span class="iconfont">&#xe501;</span>返回</a></div>
+      <div class="back"><a href="/" @click="back"><span class="iconfont">&#xe501;</span>返回</a></div>
      <!-- 导入日历组件 -->
       <kl-calendar height="25rem" width="23rem" 
       :show-festival="false" 
@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-
+  import { Indicator } from 'mint-ui';
   export default {
     data(){
       return{
@@ -52,7 +52,10 @@
     name: 'App',
     
     methods: {
-      
+      // 延时跳转时提示
+      back:function(){
+            Indicator.open('跳转中...');
+        },
       renderMonthChange(year, month) {
         console.log(year, month);
       },

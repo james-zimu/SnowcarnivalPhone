@@ -10,28 +10,32 @@
                 </div>
                 <!-- 用户名 -->
                 <mt-field class="reg-service"
-                type="text" placeholder="请输入用户名"
+                label="用户名"
+                type="text" placeholder="  6~20位可以使用 - _"
                 :attr="{ maxlength:'20',minlength:'6'}" :state=usernameState
                 @blur.native.capture="checkUsername" v-model="username"
                 >
                 </mt-field>
                 <!-- 密码 -->
                 <mt-field class="reg-service"
-                type="password" placeholder="请输入密码"
+                label="密码"
+                type="password" placeholder="密码 6~20位可以使用 - _"
                 :attr="{ maxlength:'20',minlength:'6'}" :state=passwordState
                 @blur.native.capture="checkPassword" v-model="password"
                 >
                 </mt-field>
                 <!-- 二次密码 -->
                 <mt-field class="reg-service"
-                type="password" placeholder="请再次输入密码"
+                label="再次输入密码"
+                type="password" placeholder="再次输入密码"
                 :attr="{ maxlength:'20',minlength:'6'}" :state=secpasswordState
                 @blur.native.capture="checkSecpassword" v-model="secpassword"
                 >
                 </mt-field>
                 <!-- phone -->
                 <mt-field class="reg-service"
-                type="text" placeholder="请输入手机号"
+                label="手机"
+                type="text" placeholder="请输入正确的手机号"
                 :attr="{ maxlength:'11'}" :state=phoneState
                 @blur.native.capture="checkPhone" v-model="phone"
                 >
@@ -134,11 +138,11 @@ export default {
                 return true; //返回结果
             }else{ //否则
                 //提示
-                this.$toast({
-                    message:"用户名格式错误",//提示错误
-                    position:"middle",//在中间显示
-                    duration:"1000",//显示1000毫秒
-                });
+                // this.$toast({
+                //     message:"用户名格式错误",//提示错误
+                //     position:"middle",//在中间显示
+                //     duration:"1000",//显示1000毫秒
+                // });
                 this.usernameState="error";//判断错误显示后面图标
                 return false;//返回错误
             }
@@ -151,11 +155,11 @@ export default {
                 return true;
             }else{
                 //提示信息
-                this.$toast({
-                    message:'密码格式错误',
-                    duration:'1000',
-                    position:'middle'
-                })
+                // this.$toast({
+                //     message:'密码格式错误',
+                //     duration:'1000',
+                //     position:'middle'
+                // })
                 this.passwordState="error"
                 return false
             }
@@ -168,11 +172,11 @@ export default {
                 return true
             }else{
             // 否则显示X 提示重新输入相同密码
-                this.$toast({
-                    message:'请重新输入相同密码',
-                    position:'middle',
-                    duration:'1000'
-                })
+                // this.$toast({
+                //     message:'请重新输入相同密码',
+                //     position:'middle',
+                //     duration:'1000'
+                // })
                 this.secpasswordState="error"
                 return false
             }
@@ -186,11 +190,11 @@ export default {
                 return true
             }else{
             //否则显示错误 提示手机号码格式不对
-                this.$toast({
-                    message:'手机号码格式错误',
-                    position:'middle',
-                    duration:'1000'
-                })
+                // this.$toast({
+                //     message:'手机号码格式错误',
+                //     position:'middle',
+                //     duration:'1000'
+                // })
                 this.phoneState="error"
                 return false
             }
@@ -201,11 +205,11 @@ export default {
                 this.phonecodeState="success"
                 return true
             }else{
-                this.$toast({
-                    message:"验证码错误 4位数字",
-                    position:"middle",
-                    duration:1000
-                })
+                // this.$toast({
+                //     message:"验证码错误 4位数字",
+                //     position:"middle",
+                //     duration:1000
+                // })
                 this.passwordState="error"
                 return false
             }

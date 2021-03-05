@@ -5,7 +5,7 @@
             <div class="user">
                 <div class="quit">
                     <div class="quit-inner clearfix">
-                        <a href="/" class="fr" @click="quit">退出登录</a>
+                        <a href="/" class="fr" @click="quit" v-show="show">退出登录</a>
                     </div>
                 </div>
                 <div class="subtitle">
@@ -16,7 +16,7 @@
                         <div class="welcome">欢迎来到冰雪嘉年华</div>
                         <a href="#/login">登录 / 注册</a>
                     </div>
-                    <div class="username-inner" v-else>
+                    <div class="username-inner" v-else @click="reveal">
                         <div class="img"><img :src="require('../../public/images/Yuan/' + img)" alt=""></div>
                         <a href="javascript:;" class="name">{{this.$store.state.user.uname}}</a>
                     </div>
@@ -40,7 +40,7 @@
                     <p>
                         <span class="iconfont">&#xe508;</span>
                     </p><br>
-                    <p class="remark" :style="{transform: mypraise}">我的点赞</p>
+                    <p class="remark" :style="{transform: mypraise}">收到的赞</p>
                     <p class="remark-count" :style="{transform: myquantity}">{{love}}</p>
                 </a>
             </div>
@@ -228,6 +228,7 @@
     }
 </style>
 <script>
+import { Indicator } from 'mint-ui';
 import foot from '../components/foot.vue'
 export default {
     components: { foot },
@@ -244,18 +245,31 @@ export default {
             uname:this.$store.state.user.uname,
             remark:'',
             sum:'暂无点评',
-            add:0
+            add:0,
+            show:false
         }
     },
     methods:{
+        //设置退出登录按钮
         quit:function(){
+            Indicator.open('退出中...');
             this.$store.state.aaa()
-            this.$router.push("/home_page")
         },
+        //该点击事件只是为了让 退出登录 显示
+        reveal(){
+            if(this.uname == undefined){
+                this.show = false
+            }else{
+                this.show = true
+            }
+        },
+        //用户点评模块提示
         myremark:function(){
+            //用户未登录时提示请先登录
             if(this.uname == undefined){
                 this.$messagebox('提示信息','请先登录')
             }
+            //用户点击动画切换
             else if(this.count == 0){
                 let _this = this
                 setTimeout(function(){
@@ -283,10 +297,13 @@ export default {
                 }
             }
         },
+        //用户点赞模块提示
         mygive:function(){
+            //用户未登录时提示请先登录
             if(this.uname == undefined){
                 this.$messagebox('提示信息','请先登录')
             }
+            //用户点击动画切换
             else if(this.mycount == 0){
                 let _this = this
                 setTimeout(function(){
@@ -306,6 +323,7 @@ export default {
                     },500)
                 },500)
             } 
+            //获取用户点赞的数量以及判断暂无点赞
             let aaa= this.uname
             for(var i=0;i<this.everyone.length;i++){
                 if(aaa==this.everyone[i].uname){
@@ -315,6 +333,7 @@ export default {
         }
     },
     mounted(){
+        //设置用户默认头像
         if(this.$store.state.user.photo == null){
             this.img = '1.jpg'
         }else{
@@ -325,7 +344,8 @@ export default {
         });
         this.axios.get('/discuss').then(res=>{
             this.remark = res.data.result;
-        })
+        });
+        this.reveal()
     },
 }
 </script>

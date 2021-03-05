@@ -1,5 +1,5 @@
 <template>
-  <div class="carrental-navbar">
+  <div class="carrental-navbar"  v-if="!carprice1 == ''">
     <!-- 头部区域 -->
      <mt-header class="header" title="嘉年华租车">
         <router-link to="/#/Home_page" slot="left">
@@ -51,7 +51,7 @@ export default {
         "豪华型"
       ],
       caritem:[ 
-          {carimgall:[require("../../public/shopcar/car001.png"),require("../../public/shopcar/car002.png"),require("../../public/shopcar/car003.png"),require("../../public/shopcar/car004.png"),require("../../public/shopcar/car005.png"),require("../../public/shopcar/car006.png"),require("../../public/shopcar/car008.png"),require("../../public/shopcar/car009.png"),require("../../public/shopcar/car010.png"),require("../../public/shopcar/car011.png"),require("../../public/shopcar/car012.png"),require("../../public/shopcar/car007.png"),require("../../public/shopcar/car018.png"),require("../../public/shopcar/car019.png"),require("../../public/shopcar/car020.png"),require("../../public/shopcar/car021.png"),require("../../public/shopcar/car022.png"),require("../../public/shopcar/car023.png"),require("../../public/shopcar/car013.png"),require("../../public/shopcar/car014.png"),require("../../public/shopcar/car015.png"),require("../../public/shopcar/car016.png"),require("../../public/shopcar/car017.png")]}
+          {carimgall:[require("../../public/shopcar/car001.png"),require("../../public/shopcar/car002.png"),require("../../public/shopcar/car003.png"),require("../../public/shopcar/car004.png"),require("../../public/shopcar/car005.png"),require("../../public/shopcar/car006.png"),require("../../public/shopcar/car007.png"),require("../../public/shopcar/car008.png"),require("../../public/shopcar/car009.png"),require("../../public/shopcar/car010.png"),require("../../public/shopcar/car011.png"),require("../../public/shopcar/car012.png"),require("../../public/shopcar/car013.png"),require("../../public/shopcar/car014.png"),require("../../public/shopcar/car015.png"),require("../../public/shopcar/car016.png"),require("../../public/shopcar/car017.png"),require("../../public/shopcar/car018.png"),require("../../public/shopcar/car019.png"),require("../../public/shopcar/car020.png"),require("../../public/shopcar/car021.png"),require("../../public/shopcar/car022.png"),require("../../public/shopcar/car023.png")]}
        ],
       carlist:[]
     }
@@ -156,6 +156,7 @@ export default {
       width: 7rem;
       height: 7rem;
       border: 0.1rem solid #ddd;
+      border-radius: 0.5rem;
     }
   .carrental-navbar footer{
     width: 100%;

@@ -22,7 +22,7 @@
       <div class="index-content">
         <ul class="index-serves index-serves1">
           <li class="index-ser1 ">
-            <a class="iconfont " href="/hotel">
+            <a class="iconfont " href="javascript:;">
               <p class="iconfont first-icon">&#xe603;</p>
               酒店</a
             >
@@ -34,7 +34,7 @@
             </a>
           </li>
           <li class="index-ser5">
-            <a href="/community">
+            <a href="javascript:;">
               <p class="iconfont first-icon">&#xe507;</p>
               攻略/论坛</a
             >
@@ -42,19 +42,19 @@
         </ul>
         <ul class="index-serves">
           <li class="index-ser6">
-            <a href="/ticket">
+            <a href="#/ticket">
               <p class="iconfont shop-icon">&#xe504;</p>
               门票/玩乐</a
             >
           </li>
           <li class="index-ser8">
-            <a href="/mapnav">
+            <a href="#/mapnav">
               <p class="iconfont car-icon">&#xf01f2;</p>
               地图</a
             >
           </li>
           <li class="index-ser10">
-            <a href="javascript:;">
+            <a href="#/community">
               <p class="iconfont forum-icon">&#xe620;</p>
               查攻略</a
             >
@@ -62,13 +62,13 @@
         </ul>
         <ul class="index-serves">
           <li class="index-ser6">
-            <a href="javascript:;">
+            <a href="#/hotel_details">
               <p class="iconfont hotel-icon">&#xe625;</p>
               特价/爆款</a
             >
           </li>
           <li class="index-ser8">
-            <a href="/carrental">
+            <a href="#/carrental">
               <p class="iconfont car-icon">&#xe7ba;</p>
               租车</a
             >
@@ -322,6 +322,10 @@
   font-size: 0.8125rem;
   font-weight: 200;
   margin: 0.3125rem 0 0 0.3125rem;
+}
+.home-page .foot .h-page{
+  background: #eee;
+  color: #458ce6 !important;
 }
 </style>
 <script>
