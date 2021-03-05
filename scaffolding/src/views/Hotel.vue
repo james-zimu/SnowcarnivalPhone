@@ -17,13 +17,13 @@
           <div class="imgs-box">
             <!-- 顶部左边区域容器 -->
             <div class="top-flex">
-              <a class="left-img-box" href="http://www.baidu.com">
+              <a class="left-img-box" href="#/hotel_details">
                 <p>{{ Hotel[0].title }}</p>
                 <div class="left-img">
                   <img :src="imgurl[0].imgurl" />
                 </div>
               </a>
-              <a class="right-img-box" href="http://www.baidu.com"
+              <a class="right-img-box" href="#/hotel_details"
                 ><p>{{ Hotel[1].title }}</p>
                 <div class="right-img">
                   <img :src="imgurl[1].imgurl" />
@@ -31,19 +31,19 @@
               </a>
             </div>
             <div class="bottom-flex">
-              <a class="bottom-left-box" href="http://www.baidu.com"
+              <a class="bottom-left-box" href="#/hotel_details"
                 ><p>{{ Hotel[2].title }}</p>
                 <div class="bottom-left">
                   <img :src="imgurl[2].imgurl" />
                 </div>
               </a>
-              <a class="bottom-center-box" href="http://www.baidu.com"
+              <a class="bottom-center-box" href="#/hotel_details"
                 ><p>{{ Hotel[3].title }}</p>
                 <div class="bottom-center">
                   <img :src="imgurl[3].imgurl" />
                 </div>
               </a>
-              <a class="bottom-right-box" href="http://www.baidu.com"
+              <a class="bottom-right-box" href="#/hotel_details"
                 ><p>{{ Hotel[4].title }}</p>
                 <div class="bottom-right">
                   <img :src="imgurl[4].imgurl" />
@@ -56,13 +56,13 @@
         <div class="bottom">
           <div class="bottom-title">{{ title2 }}</div>
           <div class="bottom-box">
-            <a class="bottomer-left" href="http://www.baidu.com">
+            <a class="bottomer-left" href="#/hotel_details">
               <img :src="imgurl[5].imgurl" />
             </a>
-            <a class="bottomer-center" href="http://www.baidu.com">
+            <a class="bottomer-center" href="#/hotel_details">
               <img :src="imgurl[6].imgurl" />
             </a>
-            <a class="bottomer-right" href="http://www.baidu.com">
+            <a class="bottomer-right" href="#/hotel_details">
               <img :src="imgurl[7].imgurl" />
             </a>
           </div>

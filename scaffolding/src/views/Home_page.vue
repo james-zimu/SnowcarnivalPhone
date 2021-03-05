@@ -62,7 +62,7 @@
         </ul>
         <ul class="index-serves">
           <li class="index-ser6">
-            <a href="#/hotel_details">
+            <a href="#/hotel">
               <p class="iconfont hotel-icon">&#xe625;</p>
               特价/爆款</a
             >
@@ -74,7 +74,7 @@
             >
           </li>
           <li class="index-ser10">
-            <a href="#/remark">
+            <a href="javascript:;">
               <p @click="clickkk" class="iconfont forum-icon">&#xe6f7;</p>
               发帖子</a
             >

@@ -51,7 +51,7 @@
 <style>
     .user-page{
         background: #f6f6f6;
-        width: 23.4375rem;
+        width: 100%;
         height: 41.6875rem;
     }
     .user-header{

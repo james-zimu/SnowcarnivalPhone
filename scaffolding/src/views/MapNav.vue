@@ -21,7 +21,7 @@
 <style>
     .mapnav #container{
         overflow: hidden;
-        width: 23.4375rem;
+        width: 100%;
         height: 46rem;
         margin: 0;
         font-family: "微软雅黑";

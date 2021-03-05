@@ -34,10 +34,10 @@ server.use(bodyParser.urlencoded({
 
 
 // 使用CORS中间件
-server.use(cors({
-    origin: ['http://localhost:8080', 'http://127.0.0.1:8080']
-        // origin: ['http://0.0.0.0:8080', 'http://127.0.0.1:8080']
-}));
+// server.use(cors({
+//     // origin: ['http://localhost:8080', 'http://127.0.0.1:8080']
+//     origin: ['http://0.0.0.0:8080', 'http://127.0.0.1:8080']
+// }));
 // 插入购物车
 server.post('/addcar', (req, res) => {
     //获取酒店名字 照片 价格 产品详情

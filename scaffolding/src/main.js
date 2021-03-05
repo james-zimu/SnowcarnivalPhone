@@ -4,9 +4,9 @@ import router from './router'
 import store from './store'
 //引人入axios
 import axios from 'axios'
-// axios.defaults.baseURL = 'http://8.142.43.150/app'
-axios.defaults.baseURL = 'http://127.0.0.1:3000'
-Vue.config.productionTip = true
+axios.defaults.baseURL = 'http://8.142.43.150/app'
+    // axios.defaults.baseURL = 'http://127.0.0.1:3000'
+Vue.config.productionTip = false;
 Vue.prototype.axios = axios;
 //引入mintui轮播图组件
 import { Swipe, SwipeItem } from 'mint-ui';

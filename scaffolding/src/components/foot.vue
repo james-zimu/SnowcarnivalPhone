@@ -24,6 +24,7 @@
 </template>
 <style>
 .footer{
+  width: 100%;
   height: 3.5rem;
   position: fixed;
   bottom: -8px;

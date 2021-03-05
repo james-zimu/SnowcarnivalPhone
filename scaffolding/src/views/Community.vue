@@ -138,7 +138,7 @@
 /* 社区分类 */
 .community .hot {
   height: 11.25rem;
-  width: 23.4375rem;
+  width: 100%;
   margin-bottom: 1.25rem;
 }
 .community .hour {
@@ -208,7 +208,7 @@
 }
 /* 大家都在聊 */
 .community .everyone {
-  width: 23.4375rem;
+  width: 100%;
 }
 .community .everyone .everyone-chat {
   font-size: 1.25rem;
